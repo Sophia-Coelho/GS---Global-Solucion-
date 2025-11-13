@@ -1,1 +1,1 @@
-# GS---Global-Solucion-
+# GS-Global-Solucion
