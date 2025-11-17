@@ -85,7 +85,8 @@
   border-radius: 999px;
   padding: 0.45rem 1.4rem;
   margin-left: auto;              
-  background: linear-gradient(90deg, #ffa500, #3f1b7f);
+  background: linear-gradient(90deg,rgba(102, 126, 234, 1) 0%,rgba(118, 75, 162, 1) 100%
+  );
   color: #fff !important;
   font-weight: 600;
 }
