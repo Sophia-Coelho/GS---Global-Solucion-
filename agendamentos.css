@@ -1,0 +1,40 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.minhas_aulas_pagina {
+  background: linear-gradient(
+    90deg,
+    rgba(102, 126, 234, 1) 0%,
+    rgba(118, 75, 162, 1) 100%
+  );
+  min-height: 100vh;
+}
+
+.gradient-text {
+  font-weight: bold;
+  background-image: linear-gradient(
+    90deg,
+    rgba(102, 126, 234, 1) 0%,
+    rgba(118, 75, 162, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-custom {
+  border: white;
+}
