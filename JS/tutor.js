@@ -1,4 +1,74 @@
+// JS/tutor.js
 document.addEventListener("DOMContentLoaded", () => {
+
+  // ========================= LOTTIES (CORRIGIDOS E SINCRONIZADOS) =========================
+  function playLottie(container, animRef, path, speed = 1, onComplete = null) {
+    if (animRef) {
+      try { animRef.destroy(); } catch (e) {}
+    }
+
+    const anim = lottie.loadAnimation({
+      container: container,
+      renderer: "svg",
+      loop: false,
+      autoplay: true,
+      path: path
+    });
+
+    anim.setSpeed(speed);
+
+    if (onComplete) {
+      anim.addEventListener("complete", onComplete);
+    }
+
+    return anim;
+  }
+
+  let animCreditos = null;
+  let animSelecione = null;
+  let animSucesso = null;
+
+  // Modal créditos esgotados
+  document.getElementById("modalCreditosEsgotados").addEventListener("shown.bs.modal", () => {
+    const modal = bootstrap.Modal.getInstance(document.getElementById("modalCreditosEsgotados"));
+
+    animCreditos = playLottie(
+      document.getElementById("lottieCreditos"),
+      animCreditos,
+      "/assets/lottie/sad.json",
+      1,
+      () => modal?.hide()
+    );
+  });
+
+  // Modal selecione horário (abre → anima → fecha → retorna ao agendar)
+  document.getElementById("modalSelecioneHorario").addEventListener("shown.bs.modal", () => {
+    const modalSelec = bootstrap.Modal.getInstance(document.getElementById("modalSelecioneHorario"));
+
+    animSelecione = playLottie(
+      document.getElementById("lottieSelecione"),
+      animSelecione,
+      "/assets/lottie/clock.json",
+      0.55,
+      () => {
+        modalSelec.hide();
+        new bootstrap.Modal(document.getElementById("agendarModal")).show();
+      }
+    );
+  });
+
+  // Modal agendado (sucesso)
+  document.getElementById("modalAgendado").addEventListener("shown.bs.modal", () => {
+    const modalOk = bootstrap.Modal.getInstance(document.getElementById("modalAgendado"));
+
+    animSucesso = playLottie(
+      document.getElementById("checkLottie"),
+      animSucesso,
+      "/assets/lottie/success.json",
+      1,
+      () => modalOk?.hide()
+    );
+  });
 
   // ========================= CONTROLE DE CRÉDITOS =========================
   let creditos = 5;
@@ -10,19 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   atualizarCreditos();
 
-
-
-  // ========================= LOCALSTORAGE: AGENDA POR TUTOR =========================
+  // ========================= LOCALSTORAGE =========================
   let agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || {};
-
   let tutorAtual = null;
   let horarioSelecionado = null;
 
-
-
   // ========================= FILTRO =========================
   const searchInput = document.getElementById("area");
-
   if (searchInput) {
     searchInput.addEventListener("input", function () {
       const value = this.value.toLowerCase();
@@ -33,37 +97,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
-
-  // ========================= ABRIR MODAL =========================
+  // ========================= BOTÃO AGENDAR =========================
   document.querySelectorAll(".btn-agendar").forEach((btn) => {
-    btn.addEventListener("click", function () {
+    btn.addEventListener("click", async function () {
 
-      const nomeTutor = this.parentElement.querySelector("h5").textContent;
-      tutorAtual = nomeTutor;
+      // Créditos esgotados
+      if (creditos <= 0) {
+        new bootstrap.Modal(document.getElementById("modalCreditosEsgotados")).show();
+        return;
+      }
 
-      // Se o tutor não existe na estrutura, cria
+      // Abrir modal
+      tutorAtual = this.parentElement.querySelector("h5").textContent;
+
       if (!agendamentos[tutorAtual]) {
         agendamentos[tutorAtual] = [];
       }
 
-      document.getElementById("tutorNome").textContent = nomeTutor;
+      // Reset
+      horarioSelecionado = null;
+      document.querySelectorAll(".horario-btn").forEach(b => b.classList.remove("active"));
 
-      // Atualiza horários bloqueados do tutor
+      document.getElementById("tutorNome").textContent = tutorAtual;
+
       atualizarHorariosBloqueados();
 
-      const modal = new bootstrap.Modal(document.getElementById("agendarModal"));
-      modal.show();
+      new bootstrap.Modal(document.getElementById("agendarModal")).show();
     });
   });
-
-
 
   // ========================= MARCAR HORÁRIO =========================
   document.querySelectorAll(".horario-btn").forEach((botao) => {
     botao.addEventListener("click", function () {
-
-      if (this.disabled) return; // impede clique em horário ocupado
+      if (this.disabled) return;
 
       document.querySelectorAll(".horario-btn").forEach((b) => b.classList.remove("active"));
       this.classList.add("active");
@@ -72,9 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-
-
-  // ========================= APLICAR BLOQUEIOS POR TUTOR =========================
+  // ========================= BLOQUEIOS =========================
   function atualizarHorariosBloqueados() {
     const ocupados = agendamentos[tutorAtual] || [];
 
@@ -91,55 +155,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
-
-  // ========================= CONFIRMAR AGENDAMENTO =========================
   const btnConfirmar = document.getElementById("btnConfirmar");
 
-  btnConfirmar.addEventListener("click", () => {
+  // ========================= CONFIRMAR AGENDAMENTO =========================
+  btnConfirmar.addEventListener("click", async () => {
+    const modalAgendar = bootstrap.Modal.getInstance(document.getElementById("agendarModal"));
 
+    // Sem horário → abre modal seleciona horário
     if (!horarioSelecionado) {
-      alert("Selecione um horário antes de confirmar.");
+      modalAgendar?.hide();
+      new bootstrap.Modal(document.getElementById("modalSelecioneHorario")).show();
       return;
     }
 
-    if (creditos > 0) {
-      creditos--;
-      atualizarCreditos();
-    } else {
-      alert("Você não possui créditos suficientes.");
+    // Sem créditos
+    if (creditos <= 0) {
+      modalAgendar?.hide();
+      new bootstrap.Modal(document.getElementById("modalCreditosEsgotados")).show();
       return;
     }
 
-    // Marca o horário como ocupado para o tutor atual
-    agendamentos[tutorAtual].push(horarioSelecionado);
+    // Registrar horário
+    creditos--;
+    atualizarCreditos();
 
-    // Salva no localStorage
-    localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
+    if (!agendamentos[tutorAtual]) agendamentos[tutorAtual] = [];
+
+    if (!agendamentos[tutorAtual].includes(horarioSelecionado)) {
+      agendamentos[tutorAtual].push(horarioSelecionado);
+      localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
+    }
 
     document.getElementById("confirmacaoHorario").innerText =
       `Seu horário foi agendado para ${horarioSelecionado}.`;
 
-    const modalConfirm = new bootstrap.Modal(document.getElementById("modalAgendado"));
-    modalConfirm.show();
-  });
+    modalAgendar?.hide();
 
-
-
-  // ========================= LOTTIE =========================
-  const checkContainer = document.getElementById("checkLottie");
-  let lottieAnim = null;
-
-  document.getElementById("modalAgendado").addEventListener("shown.bs.modal", () => {
-    if (lottieAnim) lottieAnim.destroy();
-
-    lottieAnim = lottie.loadAnimation({
-      container: checkContainer,
-      renderer: "svg",
-      loop: false,
-      autoplay: true,
-      path: "/assets/lottie/success.json"
-    });
+    new bootstrap.Modal(document.getElementById("modalAgendado")).show();
   });
 
 });
