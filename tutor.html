@@ -19,26 +19,62 @@
   </div>
 </div>
 
+  
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-  <div class="container-fluid nav-grid">
-    <div class="nav-col-left"></div>
-    <div class="navbar-center-group d-flex align-items-center justify-content-center">
-      <a class="nav-link" href="/Home.html">Início</a>
-      <a class="nav-link" href="/comofunciona.html">Como Funciona</a>
-      <a class="nav-link" href="/QuemSomos.html">Quem Somos</a>
+  <div class="container-fluid position-relative">
 
-      <a class="navbar-center d-flex align-items-center" href="#">
-        <img src="./img/logo.png" class="logo-center-img" alt="Logo SkillUp">
-        <span class="logo-text">SkillsUp</span>
-      </a>
+    <!-- HAMBÚRGUER (mobile/tablet → esquerda) -->
+  <button class="navbar-toggler nav-hamburger"
+        type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+    <span class="navbar-toggler-icon"></span>
+</button>
 
-      <a class="nav-link" href="/Cadastro.html">Cadastro</a>
-      <a class="nav-link" href="/tutor.html">Tutor</a>
-      <a class="nav-link" href="#" onclick="verificarLogin('/ofereca_aula.html')">Oferecer Aulas</a>
-    </div>
 
-    <div class="nav-col-right">
-      <a class="btn btn-conta" href="/agendamentos.html">Perfil</a>
+    <!-- LOGO (Central no DESKTOP / Direita no mobile) -->
+    <a class="navbar-brand d-flex align-items-center mx-auto" href="#">
+      <img src="./img/logo.png" class="logo-center-img me-2" alt="Logo SkillUp" style="height:40px;">
+      <span class="logo-text">SkillsUp</span>
+    </a>
+
+    <!-- CONTEÚDO COLAPSÁVEL -->
+    <div class="collapse navbar-collapse" id="navContent">
+
+      <!-- GRUPO ESQUERDA (desktop) -->
+      <ul class="navbar-nav d-none d-lg-flex me-auto gap-4">
+        <li class="nav-item"><a class="nav-link" href="/Home.html">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="/comofunciona.html">Como Funciona</a></li>
+        <li class="nav-item"><a class="nav-link" href="/QuemSomos.html">Quem Somos</a></li>
+      </ul>
+
+      <!-- GRUPO DIREITA (desktop) -->
+      <ul class="navbar-nav d-none d-lg-flex ms-auto gap-4">
+        <li class="nav-item"><a class="nav-link" href="/Cadastro.html">Cadastro</a></li>
+        <li class="nav-item"><a class="nav-link" href="/tutor.html">Tutor</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="verificarLogin('/ofereca_aula.html')">Oferecer Aulas</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="btn btn-conta ms-2" href="/agendamentos.html">Perfil</a>
+        </li>
+      </ul>
+
+      <!-- MOBILE/TABLET (MENU INTERNO) -->
+      <ul class="navbar-nav d-lg-none mt-3">
+        <li class="nav-item"><a class="nav-link" href="/Home.html">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="/comofunciona.html">Como Funciona</a></li>
+        <li class="nav-item"><a class="nav-link" href="/QuemSomos.html">Quem Somos</a></li>
+        <li class="nav-item"><a class="nav-link" href="/Cadastro.html">Cadastro</a></li>
+        <li class="nav-item"><a class="nav-link" href="/tutor.html">Tutor</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="verificarLogin('/ofereca_aula.html')">Oferecer Aulas</a>
+        </li>
+
+        <li class="nav-item mt-2">
+          <a class="btn-conta" href="/agendamentos.html">Perfil</a>
+        </li>
+      </ul>
+
     </div>
   </div>
 </nav>
