@@ -292,3 +292,19 @@
   background: #fff;
   transform: scale(1.2);
 }
+
+.ods-link {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.ods-link:hover {
+    transform: translateY(-4px);
+}
+
+.ods-link:active {
+    transform: translateY(-2px) scale(1.03);
+}
