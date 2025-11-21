@@ -7,8 +7,9 @@
 }
 
 body {
-  height: 100vh;
+  height: auto !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: none;
 }
 
 .agendamentos_pagina {
