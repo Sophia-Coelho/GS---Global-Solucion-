@@ -92,10 +92,47 @@ function verificarLogin(destino) {
   if (!nome) {
     const modalExistente = document.getElementById("modalBloqueio");
     if (!modalExistente) {
-      mostrarModalComContagem(3, "Você não tem acesso a esta página.", "/Cadastro.html");
+      mostrarModalComContagem(4, "Você não tem acesso a esta página.", "/Cadastro.html");
     }
     return;
   }
 
   window.location.href = destino;
 }
+
+
+
+// ============================================================
+// 🚀  NOVO BLOCO ADICIONADO (sem alterar nada do original)
+// ============================================================
+document.addEventListener("DOMContentLoaded", function () {
+
+  // ========= 1. DESTACAR LINK ATUAL =========
+  const currentPath = window.location.pathname;
+  document.querySelectorAll(".nav-link").forEach(link => {
+      if (link.getAttribute("href") === currentPath) {
+          link.classList.add("active-page");
+      }
+  });
+
+  // ========= 2. ALTERAR "Cadastro" → "Perfil" =========
+  const cadastroNav = document.getElementById("cadastroNav");
+  const usuario = localStorage.getItem("nomeUsuario");
+
+  if (cadastroNav) {
+      if (usuario) {
+          cadastroNav.textContent = "Perfil";
+          cadastroNav.href = "/agendamentos.html";
+      } else {
+          cadastroNav.textContent = "Cadastro";
+          cadastroNav.href = "/Cadastro.html";
+      }
+  }
+
+  // ========= 3. MOSTRAR NOME DO USUÁRIO EM QUALQUER TELA =========
+  const userNameDisplay = document.getElementById("userNameDisplay");
+  if (userNameDisplay && usuario) {
+      userNameDisplay.textContent = usuario;
+  }
+
+});

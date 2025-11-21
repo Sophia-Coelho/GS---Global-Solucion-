@@ -1,5 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+        const cadastroNav = document.getElementById("cadastroNav");
+
+    function atualizarNavbar() {
+        const jaTemCadastro = localStorage.getItem("nomeUsuario");
+
+        if (jaTemCadastro) {
+            cadastroNav.textContent = "Perfil";
+            cadastroNav.href = "/agendamentos.html";
+        }
+    }
+
+    atualizarNavbar();
+
     // ELEMENTOS PRINCIPAIS
     const profileWrapper = document.querySelector('.gradient-bg'); 
     const escolhaWrapper = document.querySelector('.tela-escolha-bg'); 
