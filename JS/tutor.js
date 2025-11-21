@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ========================= LOTTIES =========================
+  // ========================= LOTTIES (CORRIGIDOS E SINCRONIZADOS) =========================
   function playLottie(container, animRef, path, speed = 1, onComplete = null) {
     if (animRef) {
       try { animRef.destroy(); } catch (e) {}
@@ -15,7 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     anim.setSpeed(speed);
-    if (onComplete) anim.addEventListener("complete", onComplete);
+
+    if (onComplete) {
+      anim.addEventListener("complete", onComplete);
+    }
 
     return anim;
   }
@@ -23,6 +26,48 @@ document.addEventListener("DOMContentLoaded", () => {
   let animCreditos = null;
   let animSelecione = null;
   let animSucesso = null;
+
+  // Modal créditos esgotados
+  document.getElementById("modalCreditosEsgotados").addEventListener("shown.bs.modal", () => {
+    const modal = bootstrap.Modal.getInstance(document.getElementById("modalCreditosEsgotados"));
+
+    animCreditos = playLottie(
+      document.getElementById("lottieCreditos"),
+      animCreditos,
+      "/assets/lottie/sad.json",
+      1,
+      () => modal?.hide()
+    );
+  });
+
+  // Modal selecione horário (abre → anima → fecha → retorna ao agendar)
+  document.getElementById("modalSelecioneHorario").addEventListener("shown.bs.modal", () => {
+    const modalSelec = bootstrap.Modal.getInstance(document.getElementById("modalSelecioneHorario"));
+
+    animSelecione = playLottie(
+      document.getElementById("lottieSelecione"),
+      animSelecione,
+      "/assets/lottie/clock.json",
+      0.55,
+      () => {
+        modalSelec.hide();
+        new bootstrap.Modal(document.getElementById("agendarModal")).show();
+      }
+    );
+  });
+
+  // Modal agendado (sucesso)
+  document.getElementById("modalAgendado").addEventListener("shown.bs.modal", () => {
+    const modalOk = bootstrap.Modal.getInstance(document.getElementById("modalAgendado"));
+
+    animSucesso = playLottie(
+      document.getElementById("checkLottie"),
+      animSucesso,
+      "/assets/lottie/success.json",
+      1,
+      () => modalOk?.hide()
+    );
+  });
 
   // ========================= CONTROLE DE CRÉDITOS =========================
   function atualizarCreditos() {
@@ -56,21 +101,19 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".btn-agendar").forEach((btn) => {
     btn.addEventListener("click", function () {
 
-      if (CreditSystem.get() <= 0) {
-        const modal = new bootstrap.Modal(document.getElementById("modalCreditosEsgotados"));
-        modal.show();
-
-        animCreditos = playLottie(
-          document.getElementById("lottieCreditos"),
-          animCreditos,
-          "/assets/lottie/sad.json",
-          1
-        );
-
+      // Créditos esgotados
+      if (creditos <= 0) {
+        new bootstrap.Modal(document.getElementById("modalCreditosEsgotados")).show();
         return;
       }
 
       tutorAtual = this.parentElement.querySelector("h5").textContent;
+
+      if (!agendamentos[tutorAtual]) {
+        agendamentos[tutorAtual] = [];
+      }
+
+      // Reset
       horarioSelecionado = null;
 
       document.querySelectorAll(".horario-btn").forEach(b => b.classList.remove("active"));
@@ -88,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     botao.addEventListener("click", function () {
       if (this.disabled) return;
 
-      document.querySelectorAll(".horario-btn").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll(".horario-btn").forEach(b => b.classList.remove("active"));
       this.classList.add("active");
 
       horarioSelecionado = this.textContent.trim();
@@ -134,7 +177,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (CreditSystem.get() <= 0) {
+    // Sem créditos
+    if (creditos <= 0) {
       modalAgendar?.hide();
 
       const modal = new bootstrap.Modal(document.getElementById("modalCreditosEsgotados"));
@@ -149,8 +193,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // DESCONTA CRÉDITO
-    CreditSystem.remove(1);
+    // Registrar horário
+    creditos--;
     atualizarCreditos();
 
     // SALVAR FORMATADO
