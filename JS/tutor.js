@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ========================= LOTTIES =========================
-  function playLottie(container, animRef, path, speed = 1, onComplete = null) {
-    if (!container) return null;
+  // ========================= LOTTIES (DURAÇÕES IGUALADAS) =========================
+  const DURACAO_PADRAO = 1.5;
+
+  function playLottie(container, animRef, path, onComplete = null) {
     if (animRef) {
       try { animRef.destroy(); } catch (e) {}
     }
+
     const anim = lottie.loadAnimation({
       container: container,
       renderer: "svg",
@@ -13,8 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
       autoplay: true,
       path: path
     });
-    anim.setSpeed(speed);
+
+    anim.addEventListener("DOMLoaded", () => {
+      const frames = anim.totalFrames;
+      const fps = anim.frameRate;
+      const duracaoOriginal = frames / fps;
+      const novaVelocidade = duracaoOriginal / DURACAO_PADRAO;
+      anim.setSpeed(novaVelocidade);
+    });
+
     if (onComplete) anim.addEventListener("complete", onComplete);
+
     return anim;
   }
 
@@ -22,45 +33,78 @@ document.addEventListener("DOMContentLoaded", () => {
   let animSelecione = null;
   let animSucesso = null;
 
+  // ========== MODAIS FECHAM SOMENTE APÓS A LOTTIE TERMINAR ==========
+
+  // Créditos esgotados
+  document.getElementById("modalCreditosEsgotados").addEventListener("shown.bs.modal", () => {
+    const modal = bootstrap.Modal.getInstance(document.getElementById("modalCreditosEsgotados"));
+    animCreditos = playLottie(
+      document.getElementById("lottieCreditos"),
+      animCreditos,
+      "/assets/lottie/sad.json",
+      () => modal?.hide()
+    );
+  });
+
+  // Selecione horário
+  document.getElementById("modalSelecioneHorario").addEventListener("shown.bs.modal", () => {
+    const modalSelec = bootstrap.Modal.getInstance(document.getElementById("modalSelecioneHorario"));
+    animSelecione = playLottie(
+      document.getElementById("lottieSelecione"),
+      animSelecione,
+      "/assets/lottie/clock.json",
+      () => {
+        modalSelec.hide();
+        new bootstrap.Modal(document.getElementById("agendarModal")).show();
+      }
+    );
+  });
+
+  // Sucesso
+  document.getElementById("modalAgendado").addEventListener("shown.bs.modal", () => {
+    const modalOk = bootstrap.Modal.getInstance(document.getElementById("modalAgendado"));
+    animSucesso = playLottie(
+      document.getElementById("checkLottie"),
+      animSucesso,
+      "/assets/lottie/success.json",
+      () => modalOk?.hide()
+    );
+  });
+
   // ========================= CONTROLE DE CRÉDITOS =========================
-  function atualizarCreditos() {
-    const c = (window.CreditSystem && typeof window.CreditSystem.get === 'function')
-      ? window.CreditSystem.get()
-      : Number(localStorage.getItem('creditos') || 0);
-    const span = document.querySelector("#creditos");
-    if (span) span.textContent = c;
+  localStorage.setItem("creditos", 5); // sempre reinicia com 5
+  const creditosSpan = document.querySelector("#creditos");
+
+  function getCreditos() {
+    return Number(localStorage.getItem("creditos") || 0);
   }
 
-  function removerCredito(n = 1) {
-    if (window.CreditSystem && typeof window.CreditSystem.remove === 'function') {
-      return window.CreditSystem.remove(n);
-    } else {
-      const atual = Number(localStorage.getItem('creditos') || 0);
-      const novo = Math.max(0, atual - n);
-      localStorage.setItem('creditos', novo);
-      return novo;
-    }
+  function setCreditos(v) {
+    localStorage.setItem("creditos", v);
+    atualizarCreditos();
+  }
+
+  function atualizarCreditos() {
+    if (creditosSpan) creditosSpan.textContent = getCreditos();
   }
 
   atualizarCreditos();
 
-  // ========================= VARIÁVEIS =========================
+  // ========================= LOCALSTORAGE AGENDAMENTOS =========================
   let aulasAgendadas = JSON.parse(localStorage.getItem("aulasAgendadas")) || [];
+  let agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || {};
   let tutorAtual = null;
   let horarioSelecionado = null;
 
-  // ========================= FILTRO =========================
+  // ========================= FILTRO DE TUTORES =========================
   const searchInput = document.getElementById("area");
   if (searchInput) {
     searchInput.addEventListener("input", function () {
-      aplicarFiltro(this.value.toLowerCase());
-    });
-  }
-
-  function aplicarFiltro(valor) {
-    document.querySelectorAll(".tutor-card").forEach((card) => {
-      const area = card.getAttribute("data-area") || "";
-      card.style.display = area.toLowerCase().includes(valor) ? "block" : "none";
+      const valor = this.value.toLowerCase();
+      document.querySelectorAll(".tutor-card").forEach(card => {
+        const area = card.getAttribute("data-area") || "";
+        card.style.display = area.toLowerCase().includes(valor) ? "block" : "none";
+      });
     });
   }
 
@@ -78,99 +122,104 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateCarouselPosition() {
-    const cards = Array.from(track.children);
+    const cards = [...track.children];
     if (!cards.length) return;
+
     const visible = calcVisibleCount();
-    const first = cards[0];
-    const style = getComputedStyle(first);
     const gap = parseFloat(getComputedStyle(track).gap) || 18;
-    const cardWidth = first.getBoundingClientRect().width + gap;
+    const cardWidth = cards[0].getBoundingClientRect().width + gap;
+
     const maxIndex = Math.max(0, cards.length - visible);
-    if (currentIndex < 0) currentIndex = 0;
-    if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+    currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+
     track.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
   }
 
-  leftBtn?.addEventListener('click', () => { currentIndex--; updateCarouselPosition(); });
-  rightBtn?.addEventListener('click', () => { currentIndex++; updateCarouselPosition(); });
-  window.addEventListener('resize', updateCarouselPosition);
+  leftBtn?.addEventListener("click", () => { currentIndex--; updateCarouselPosition(); });
+  rightBtn?.addEventListener("click", () => { currentIndex++; updateCarouselPosition(); });
+  window.addEventListener("resize", updateCarouselPosition);
+  updateCarouselPosition();
 
   // ========================= CARREGAR AULAS PUBLICADAS =========================
   function carregarAulasPublicadas() {
-    const aulasPublicadas = JSON.parse(localStorage.getItem('aulasPublicadas')) || [];
+    const aulasPublicadas = JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
 
     aulasPublicadas.forEach(aula => {
       const col = document.createElement("div");
       col.className = "col-card";
 
-      const horarios = aula.horarios || [];
+      col.innerHTML = `
+        <div class="tutor-card slide-up"
+          data-area="${aula.categoria || aula.assunto}"
+          data-horarios='${JSON.stringify(aula.horarios || [])}'
+          data-nome="${aula.nomeTutor}">
+          <h5>${aula.nomeTutor}</h5>
+          <p>${aula.assunto}</p>
+          <p>${aula.categoria || aula.assunto}</p>
+          <p>⭐ ⭐ ⭐</p>
+          <button class="btn btn-agendar">Agendar</button>
+        </div>
+      `;
 
-      // Card com data-nome para identificar tutor
-col.innerHTML = `
-  <div class="tutor-card slide-up" 
-      data-area="${aula.categoria || aula.assunto}" 
-      data-horarios='${JSON.stringify(horarios)}'
-      data-nome="${aula.nomeTutor}">
-      <H5> ${aula.nomeTutor}</H5>
-    <p>${aula.assunto}</p>
-    <p>${aula.categoria || aula.assunto}</p>
-    <p>⭐ ⭐ ⭐</p>
-    <button class="btn btn-agendar">Agendar</button>
-  </div>
-`;
       track.appendChild(col);
     });
 
     attachAgendarHandlers();
     updateCarouselPosition();
-    aplicarFiltro(searchInput?.value.toLowerCase() || '');
   }
 
   carregarAulasPublicadas();
 
-  // ========================= AGENDAR =========================
+  // ========================= AGENDA =========================
   function attachAgendarHandlers() {
     document.querySelectorAll(".btn-agendar").forEach(btn => {
-      btn.removeEventListener("click", onAgendarClick);
+      btn.replaceWith(btn.cloneNode(true));
+    });
+
+    document.querySelectorAll(".btn-agendar").forEach(btn => {
       btn.addEventListener("click", onAgendarClick);
     });
   }
 
   function onAgendarClick(e) {
-    const card = e.target.closest('.tutor-card');
-    tutorAtual = card?.getAttribute('data-nome') || '';
+    if (getCreditos() <= 0) {
+      new bootstrap.Modal(document.getElementById("modalCreditosEsgotados")).show();
+      return;
+    }
+
+    const card = e.target.closest(".tutor-card");
+    tutorAtual = card?.getAttribute("data-nome");
     horarioSelecionado = null;
 
-    const horariosCard = card ? JSON.parse(card.getAttribute('data-horarios') || '[]') : [];
-    const horarioBtns = document.querySelectorAll(".horario-btn");
+    const horariosCard = JSON.parse(card.getAttribute("data-horarios") || "[]");
 
-    horarioBtns.forEach((btn) => {
+    document.querySelectorAll(".horario-btn").forEach(btn => {
       const hora = btn.textContent.trim();
-      if (horariosCard.length && !horariosCard.includes(hora)) {
-        btn.style.display = "none";
-      } else {
-        btn.style.display = "inline-block";
-      }
+      btn.style.display = (!horariosCard.length || horariosCard.includes(hora)) ? "inline-block" : "none";
       btn.classList.remove("active");
       btn.disabled = false;
     });
 
     document.getElementById("tutorNome").textContent = tutorAtual;
+
     atualizarHorariosBloqueados();
+
     new bootstrap.Modal(document.getElementById("agendarModal")).show();
   }
 
   document.querySelectorAll(".horario-btn").forEach(btn => {
-    btn.addEventListener("click", function () {
-      if (this.disabled) return;
+    btn.addEventListener("click", () => {
+      if (btn.disabled) return;
       document.querySelectorAll(".horario-btn").forEach(b => b.classList.remove("active"));
-      this.classList.add("active");
-      horarioSelecionado = this.textContent.trim();
+      btn.classList.add("active");
+      horarioSelecionado = btn.textContent.trim();
     });
   });
 
   function atualizarHorariosBloqueados() {
     const ocupados = aulasAgendadas.filter(a => a.tutor === tutorAtual).map(a => a.horario);
+
     document.querySelectorAll(".horario-btn").forEach(btn => {
       const hora = btn.textContent.trim();
       if (ocupados.includes(hora)) {
@@ -180,45 +229,41 @@ col.innerHTML = `
     });
   }
 
-  // ========================= CONFIRMAR AGENDAMENTO =========================
+  // ========================= CONFIRMAR =========================
   const btnConfirmar = document.getElementById("btnConfirmar");
-  btnConfirmar?.addEventListener("click", () => {
+
+  btnConfirmar.addEventListener("click", () => {
+    const modalAgendar = bootstrap.Modal.getInstance(document.getElementById("agendarModal"));
+
     if (!horarioSelecionado) {
-      bootstrap.Modal.getInstance(document.getElementById("agendarModal"))?.hide();
+      modalAgendar?.hide();
       new bootstrap.Modal(document.getElementById("modalSelecioneHorario")).show();
-      animSelecione = playLottie(document.getElementById("lottieSelecione"), animSelecione, "/assets/lottie/clock.json");
       return;
     }
 
-    if ((window.CreditSystem?.get?.() || Number(localStorage.getItem('creditos') || 0)) <= 0) {
-      bootstrap.Modal.getInstance(document.getElementById("agendarModal"))?.hide();
+    if (getCreditos() <= 0) {
+      modalAgendar?.hide();
       new bootstrap.Modal(document.getElementById("modalCreditosEsgotados")).show();
-      animCreditos = playLottie(document.getElementById("lottieCreditos"), animCreditos, "/assets/lottie/sad.json");
       return;
     }
 
-    // REMOVE 1 CRÉDITO
-    removerCredito(1);
-    atualizarCreditos();
-
-    // SALVA AULA AGENDADA
+    // grava agendamento
     aulasAgendadas.push({
       tutor: tutorAtual,
-      horario: horarioSelecionado,
-      categoria: tutorAtual,
-      descricao: `Aula com ${tutorAtual}`
+      horario: horarioSelecionado
     });
+
     localStorage.setItem("aulasAgendadas", JSON.stringify(aulasAgendadas));
 
-    document.getElementById("confirmacaoHorario").innerText = `Seu horário foi agendado para ${horarioSelecionado}.`;
+    // remove 1 crédito
+    setCreditos(getCreditos() - 1);
 
-    bootstrap.Modal.getInstance(document.getElementById("agendarModal"))?.hide();
+    document.getElementById("confirmacaoHorario").innerText =
+      `Seu horário foi agendado para ${horarioSelecionado}.`;
+
+    modalAgendar?.hide();
     new bootstrap.Modal(document.getElementById("modalAgendado")).show();
-    animSucesso = playLottie(document.getElementById("checkLottie"), animSucesso, "/assets/lottie/success.json");
-
-    atualizarHorariosBloqueados();
   });
 
-  attachAgendarHandlers();
-  updateCarouselPosition();
 });
+
