@@ -1,8 +1,11 @@
 // JS/tutor.js
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ========================= LOTTIES (CORRIGIDOS E SINCRONIZADOS) =========================
-  function playLottie(container, animRef, path, speed = 1, onComplete = null) {
+  // ========================= LOTTIES (DURAÇÕES IGUALADAS) =========================
+  // Todas as animações vão durar exatamente 1.5s — mesma duração do success.json
+  const DURACAO_PADRAO = 1.5;
+
+  function playLottie(container, animRef, path, onComplete = null) {
     if (animRef) {
       try { animRef.destroy(); } catch (e) {}
     }
@@ -15,7 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
       path: path
     });
 
-    anim.setSpeed(speed);
+    // Quando a Lottie carregar, recalculamos automaticamente a velocidade
+    anim.addEventListener("DOMLoaded", () => {
+      const frames = anim.totalFrames;
+      const fps = anim.frameRate;
+
+      const durOriginal = frames / fps;
+      const novaSpeed = durOriginal / DURACAO_PADRAO;
+
+      anim.setSpeed(novaSpeed);
+    });
 
     if (onComplete) {
       anim.addEventListener("complete", onComplete);
@@ -28,6 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let animSelecione = null;
   let animSucesso = null;
 
+  // ========== MODAIS FECHAM SOMENTE APÓS A LOTTIE TERMINAR ==========
+
   // Modal créditos esgotados
   document.getElementById("modalCreditosEsgotados").addEventListener("shown.bs.modal", () => {
     const modal = bootstrap.Modal.getInstance(document.getElementById("modalCreditosEsgotados"));
@@ -36,12 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("lottieCreditos"),
       animCreditos,
       "/assets/lottie/sad.json",
-      1,
       () => modal?.hide()
     );
   });
 
-  // Modal selecione horário (abre → anima → fecha → retorna ao agendar)
+  // Modal selecione horário
   document.getElementById("modalSelecioneHorario").addEventListener("shown.bs.modal", () => {
     const modalSelec = bootstrap.Modal.getInstance(document.getElementById("modalSelecioneHorario"));
 
@@ -49,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("lottieSelecione"),
       animSelecione,
       "/assets/lottie/clock.json",
-      0.55,
       () => {
         modalSelec.hide();
         new bootstrap.Modal(document.getElementById("agendarModal")).show();
@@ -65,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("checkLottie"),
       animSucesso,
       "/assets/lottie/success.json",
-      1,
       () => modalOk?.hide()
     );
   });
@@ -101,20 +112,17 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".btn-agendar").forEach((btn) => {
     btn.addEventListener("click", async function () {
 
-      // Créditos esgotados
       if (creditos <= 0) {
         new bootstrap.Modal(document.getElementById("modalCreditosEsgotados")).show();
         return;
       }
 
-      // Abrir modal
       tutorAtual = this.parentElement.querySelector("h5").textContent;
 
       if (!agendamentos[tutorAtual]) {
         agendamentos[tutorAtual] = [];
       }
 
-      // Reset
       horarioSelecionado = null;
       document.querySelectorAll(".horario-btn").forEach(b => b.classList.remove("active"));
 
@@ -131,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     botao.addEventListener("click", function () {
       if (this.disabled) return;
 
-      document.querySelectorAll(".horario-btn").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll(".horario-btn").forEach(b => b.classList.remove("active"));
       this.classList.add("active");
 
       horarioSelecionado = this.textContent.trim();
@@ -161,21 +169,18 @@ document.addEventListener("DOMContentLoaded", () => {
   btnConfirmar.addEventListener("click", async () => {
     const modalAgendar = bootstrap.Modal.getInstance(document.getElementById("agendarModal"));
 
-    // Sem horário → abre modal seleciona horário
     if (!horarioSelecionado) {
       modalAgendar?.hide();
       new bootstrap.Modal(document.getElementById("modalSelecioneHorario")).show();
       return;
     }
 
-    // Sem créditos
     if (creditos <= 0) {
       modalAgendar?.hide();
       new bootstrap.Modal(document.getElementById("modalCreditosEsgotados")).show();
       return;
     }
 
-    // Registrar horário
     creditos--;
     atualizarCreditos();
 
