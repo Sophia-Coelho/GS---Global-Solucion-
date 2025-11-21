@@ -6,6 +6,11 @@
     );
 }
 
+#userwayAccessibilityIcon {
+    margin-top: 250px !important; /* ajusta a posição vertical do ícone */
+    z-index: 9999 !important;   /* garante que o botão fique acima de outros elementos */
+}
+
 /* BOTÃO VOLTAR */
 .btn-dark.btn-sm {
     background: linear-gradient(90deg, #6c63ff, #2dd4bf) !important;
@@ -15,6 +20,7 @@
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 12px;
+    margin-top: 80px;
 }
 
 .btn-dark.btn-sm:hover {

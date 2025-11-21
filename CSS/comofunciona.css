@@ -11,6 +11,10 @@ body {
     color: white;
 }
 
+#userwayAccessibilityIcon {
+  margin-top: 250px !important; /* ajusta a posição vertical do ícone */
+  z-index: 9999 !important;   /* garante que o botão fique acima de outros elementos */
+}
 
 /* Centralização geral */
 .container {

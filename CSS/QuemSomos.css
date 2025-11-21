@@ -8,6 +8,15 @@ body {
     padding: 30px 0;
 }
 
+.navbar-height-spacer {
+    padding-top: 30px; 
+}
+
+#userwayAccessibilityIcon {
+    margin-top: 250px !important; /* ajusta a posição vertical do ícone */
+    z-index: 9999 !important;   /* garante que o botão fique acima de outros elementos */
+}
+
 .team-member {
     background-color: #ffffff; 
     padding: 20px;
