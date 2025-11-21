@@ -7,10 +7,10 @@ function setHorarioAula(element) {
   const index = horariosAulaSelecionados.indexOf(horarioSelecionado);
 
   if (index > -1) {
-    element.classList.remove('selected');
+    element.classList.remove('active'); // usar classe 'active' para o CSS
     horariosAulaSelecionados.splice(index, 1);
   } else {
-    element.classList.add('selected');
+    element.classList.add('active'); // usar classe 'active' para o CSS
     horariosAulaSelecionados.push(horarioSelecionado);
   }
 
@@ -20,15 +20,25 @@ function setHorarioAula(element) {
 function publicarAula() {
   console.log('[ofereca_aula.js] publicarAula chamado');
 
-  // Pegar todos os valores do formulário
-  const nomeTutor = document.getElementById('nomeTutor')?.value || '';
-  const assuntoAula = document.getElementById('assuntoAula')?.value || '';
-  const categoriaAula = document.getElementById('categoriaAula')?.value || '';
-  const descricaoAula = document.getElementById('descricaoAula')?.value || '';
+  // Pegar valores do formulário
+  const nomeTutor = document.getElementById('nomeTutor');
+  const assuntoAula = document.getElementById('assuntoAula');
+  const categoriaAula = document.getElementById('categoriaAula');
+  const descricaoAula = document.getElementById('descricaoAula');
 
-  // Validação de campos obrigatórios
-  if (!nomeTutor || !assuntoAula || !descricaoAula) {
-    alert('Por favor, preencha todos os campos!');
+  // Resetar estados de erro
+  [nomeTutor, assuntoAula, descricaoAula].forEach(input => {
+    input.classList.remove('is-invalid');
+  });
+
+  let erro = false;
+
+  if (!nomeTutor.value.trim()) { nomeTutor.classList.add('is-invalid'); erro = true; }
+  if (!assuntoAula.value.trim()) { assuntoAula.classList.add('is-invalid'); erro = true; }
+  if (!descricaoAula.value.trim()) { descricaoAula.classList.add('is-invalid'); erro = true; }
+
+  if (erro) {
+    alert('Por favor, preencha todos os campos obrigatórios!');
     return;
   }
 
@@ -37,16 +47,15 @@ function publicarAula() {
     return;
   }
 
-  // Recuperar aulas já publicadas do localStorage
+  // Recuperar aulas já publicadas
   const aulasPublicadasArmazenadas = localStorage.getItem('aulasPublicadas');
   const aulasPublicadas = aulasPublicadasArmazenadas ? JSON.parse(aulasPublicadasArmazenadas) : [];
 
-  // Criar nova aula com o nome do tutor
   const novaAula = {
-    nomeTutor: nomeTutor,          // ← Adicionado para mostrar o tutor
-    assunto: assuntoAula,
-    categoria: categoriaAula,
-    descricao: descricaoAula,
+    nomeTutor: nomeTutor.value.trim(),
+    assunto: assuntoAula.value.trim(),
+    categoria: categoriaAula.value,
+    descricao: descricaoAula.value.trim(),
     horarios: [...horariosAulaSelecionados],
     publicadoEm: new Date().toISOString()
   };
@@ -54,26 +63,22 @@ function publicarAula() {
   // Salvar no localStorage
   aulasPublicadas.push(novaAula);
   localStorage.setItem('aulasPublicadas', JSON.stringify(aulasPublicadas));
-  console.log('[ofereca_aula.js] aula salva em localStorage', novaAula);
+  console.log('[ofereca_aula.js] aula salva', novaAula);
 
   // Limpar formulário
-  document.getElementById('nomeTutor').value = '';
-  document.getElementById('assuntoAula').value = '';
-  document.getElementById('categoriaAula').selectedIndex = 0;
-  document.getElementById('descricaoAula').value = '';
-  document.querySelectorAll('.slot-btn.selected').forEach(btn => btn.classList.remove('selected'));
+  nomeTutor.value = '';
+  assuntoAula.value = '';
+  categoriaAula.selectedIndex = 0;
+  descricaoAula.value = '';
+  document.querySelectorAll('.slot-btn.active').forEach(btn => btn.classList.remove('active'));
   horariosAulaSelecionados = [];
 
-  // Tentativa de adicionar crédito
+  // Adicionar crédito
   try {
     if (typeof adicionarCreditos === 'function') {
       adicionarCreditos(1);
-      console.log('[ofereca_aula.js] adicionou 1 crédito via adicionarCreditos()');
     } else if (window.CreditSystem && typeof window.CreditSystem.add === 'function') {
       window.CreditSystem.add(1);
-      console.log('[ofereca_aula.js] adicionou 1 crédito via CreditSystem.add()');
-    } else {
-      console.warn('[ofereca_aula.js] API de créditos não encontrada');
     }
   } catch (err) {
     console.error('[ofereca_aula.js] erro ao adicionar crédito:', err);

@@ -1,6 +1,7 @@
 function excluirAulaAgendada(index) {
   if (confirm("Tem certeza que deseja cancelar esta aula?")) {
-    const aulasAgendadas = JSON.parse(localStorage.getItem("aulasAgendadas")) || [];
+    const aulasAgendadas =
+      JSON.parse(localStorage.getItem("aulasAgendadas")) || [];
     aulasAgendadas.splice(index, 1);
     localStorage.setItem("aulasAgendadas", JSON.stringify(aulasAgendadas));
 
@@ -15,7 +16,8 @@ function excluirAulaAgendada(index) {
 
 function excluirAulaPublicada(index) {
   if (confirm("Tem certeza que deseja excluir esta aula publicada?")) {
-    const aulasPublicadas = JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
+    const aulasPublicadas =
+      JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
     aulasPublicadas.splice(index, 1);
     localStorage.setItem("aulasPublicadas", JSON.stringify(aulasPublicadas));
 
@@ -28,8 +30,11 @@ function excluirAulaPublicada(index) {
 }
 
 function agendarAula() {
-  const aulasAgendadas = JSON.parse(localStorage.getItem("aulasAgendadas")) || [];
+  const aulasAgendadas =
+    JSON.parse(localStorage.getItem("aulasAgendadas")) || [];
   const agendamentoAulasEl = document.getElementById("agendamentoAulas");
+
+  if (!agendamentoAulasEl) return;
 
   if (aulasAgendadas.length === 0) {
     agendamentoAulasEl.innerHTML = `
@@ -44,18 +49,36 @@ function agendarAula() {
   aulasAgendadas.forEach((aula, index) => {
     const div = document.createElement("div");
     div.innerHTML = `
-      <div class="card mb-3">
+      <div class="card mb-3 shadow-sm">
         <div class="card-body">
-          <h5 class="text-primary mb-2">${aula.tutor}</h5>
-          <p class="mb-1 text-muted">${aula.descricao}</p> 
+          <h5 class="text-primary mb-2">
+            <i class="bi bi-person-circle"></i> ${aula.tutor || "Tutor"}
+          </h5>
+          ${
+            aula.descricao
+              ? `<p class="mb-1 text-muted">${aula.descricao}</p>`
+              : ""
+          }
+          ${
+            aula.categoria
+              ? `<span class="badge bg-secondary mb-2">${aula.categoria}</span>`
+              : ""
+          }
           <p class="mb-0">
-            <strong><i class="bi bi-clock"></i> Horário:</strong> ${aula.horario}
+            <strong><i class="bi bi-clock"></i> Horários:</strong> ${
+              aula.horario || "Não definido"
+            }
           </p>
-
-          <!-- AQUI: O BOTÃO QUE FALTAVA -->
-          <button class="btn btn-danger btn-sm mt-2" onclick="excluirAulaAgendada(${index})">
-            <i class="bi bi-trash"></i> Excluir
-          </button>
+          ${
+            aula.dataAgendamento
+              ? `<small class="text-muted">Agendado em: ${aula.dataAgendamento}</small>`
+              : ""
+          }
+          <div class="mt-2">
+            <button class="btn btn-danger btn-sm" onclick="excluirAulaAgendada(${index})">
+              <i class="bi bi-trash"></i> Excluir
+            </button>
+          </div>
         </div>
       </div>`;
     agendamentoAulasEl.appendChild(div);
@@ -63,7 +86,8 @@ function agendarAula() {
 }
 
 function carregarAulas() {
-  const aulasPublicadas = JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
+  const aulasPublicadas =
+    JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
   const aulasPublicadasEl = document.getElementById("aulasPublicadas");
   aulasPublicadasEl.innerHTML = "";
 

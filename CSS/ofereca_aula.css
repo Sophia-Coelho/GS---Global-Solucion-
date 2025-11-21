@@ -172,3 +172,54 @@ body {
   }
 }
 
+.card-custom {
+    border-radius: 20px !important;
+    box-shadow: 0 0 12px #00000025;
+    border: none;
+    padding: 1rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 20px !important;
+    padding: 12px !important;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border: 2px solid red !important;
+    background-color: #ffeaea !important;
+}
+
+.slot-btn {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 10px;
+    width: 100%;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.slot-btn:hover {
+    background-color: #e2e6ea;
+}
+
+.slot-btn.active {
+    background-color: #6f42c1;
+    color: #fff;
+    border-color: #6f42c1;
+}
+
+.ofereca_aula_btn {
+    border-radius: 20px !important;
+    padding: 12px;
+    font-size: 18px;
+}
+
+.ofereca_aula_h2 {
+    font-size: 28px;
+    margin-bottom: 1.5rem;
+}
