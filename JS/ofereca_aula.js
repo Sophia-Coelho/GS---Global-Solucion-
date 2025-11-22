@@ -47,23 +47,22 @@ function publicarAula() {
     return;
   }
 
-  // Recuperar aulas já publicadas
-  const aulasPublicadasArmazenadas = localStorage.getItem('aulasPublicadas');
-  const aulasPublicadas = aulasPublicadasArmazenadas ? JSON.parse(aulasPublicadasArmazenadas) : [];
+  // ======================= SALVAR AULA E DISPONIBILIZAR PARA tutor.html =======================
+const novaAula = {
+  nomeTutor: nomeTutor.value.trim(),
+  assunto: assuntoAula.value.trim(),
+  categoria: categoriaAula.value,
+  descricao: descricaoAula.value.trim(),
+  horarios: [...horariosAulaSelecionados],
+  publicadoEm: Date.now()
+};
 
-  const novaAula = {
-    nomeTutor: nomeTutor.value.trim(),
-    assunto: assuntoAula.value.trim(),
-    categoria: categoriaAula.value,
-    descricao: descricaoAula.value.trim(),
-    horarios: [...horariosAulaSelecionados],
-    publicadoEm: new Date().toISOString()
-  };
+let aulasPublicadas = JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
+aulasPublicadas.push(novaAula);
 
-  // Salvar no localStorage
-  aulasPublicadas.push(novaAula);
-  localStorage.setItem('aulasPublicadas', JSON.stringify(aulasPublicadas));
-  console.log('[ofereca_aula.js] aula salva', novaAula);
+localStorage.setItem("aulasPublicadas", JSON.stringify(aulasPublicadas));
+
+console.log("[ofereca_aula.js] Aula publicada e disponível para tutor.html:", novaAula);
 
   // Limpar formulário
   nomeTutor.value = '';

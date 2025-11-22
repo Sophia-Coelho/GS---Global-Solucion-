@@ -143,18 +143,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const col = document.createElement("div");
       col.className = "col-card";
 
-      col.innerHTML = `
-        <div class="tutor-card slide-up"
-          data-area="${aula.categoria || aula.assunto}"
-          data-horarios='${JSON.stringify(aula.horarios || [])}'
-          data-nome="${aula.nomeTutor}">
-          <h5>${aula.nomeTutor}</h5>
-          <p>${aula.assunto}</p>
-          <p>${aula.categoria || aula.assunto}</p>
-          <p>⭐ ⭐ ⭐</p>
-          <button class="btn btn-agendar">Agendar</button>
-        </div>
-      `;
+col.innerHTML = `
+  <div class="tutor-card slide-up"
+    data-area="${aula.categoria || aula.assunto}"
+    data-horarios='${JSON.stringify(aula.horarios || [])}'
+    data-nome="${aula.nomeTutor}">
+    
+    <h5>${aula.nomeTutor}</h5>
+    <p><strong>${aula.assunto}</strong></p>
+    <p class="text-muted">${aula.categoria}</p>
+
+    <!-- ✅ Descrição adicionada -->
+    <p class="descricao-tutor">${aula.descricao}</p>
+
+    <p>⭐ ⭐ ⭐</p>
+    <button class="btn btn-agendar">Agendar</button>
+  </div>
+`;
+
 
       track.appendChild(col);
     });

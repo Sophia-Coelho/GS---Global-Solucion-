@@ -230,3 +230,11 @@ body {
 @media (max-width: 600px) {
   .col-card { flex: 0 0 100%; } /* 1 visível */
 }
+
+
+.voltar {
+  margin-top: -100px;
+  margin-left: 80px;
+  display: inline-flex;
+  align-items: center;
+}
