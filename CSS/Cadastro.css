@@ -154,25 +154,26 @@
     border-radius: 25px;
 }
 
+#skillsCoinsBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
 .badge-coins {
-    background: #ffc107;
-    color: #000;
-    font-weight: bold;
-    padding: 8px 14px;
-    border-radius: 6px;
     font-size: 1.1rem;
 }
 
 .mensagem-coins {
-    background: #fff8d8;
-    padding: 10px 16px;
+    background: #fff7c4;
+    padding: 8px 12px;
     border-radius: 6px;
-    border: 1px solid #f2c94c;
-    font-size: 0.95rem;
-    max-width: 450px;
-    margin: 10px auto 0;
+    max-width: 340px;
+    font-size: .9rem;
+    text-align: center;
+    border: 1px solid #d8c53b;
 }
-
 
 @media (max-width: 576px) {
     .card {

@@ -16,8 +16,8 @@ function mostrarModalComContagem(segundos, mensagem, destino) {
       <h2 style="margin-bottom:1rem; color:#d9534f;">Atenção!</h2>
       <p style="margin-bottom:1rem;">${mensagem}</p>
       <p id="contadorModal"
-         style="font-weight:bold; font-size:1.2rem; margin-top:1rem;">
-         Redirecionando em ${segundos} segundos...
+        style="font-weight:bold; font-size:1.2rem; margin-top:1rem;">
+        Redirecionando em ${segundos} segundos...
       </p>
     </div>
   `;
@@ -162,3 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
     userNameDisplay.textContent = usuario;
   }
 });
+
+function mostrarMensagemCoins(){
+    document.getElementById("mensagemCoins").style.display = "block";
+}
