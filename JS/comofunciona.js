@@ -1,7 +1,17 @@
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const flipContainers = document.querySelectorAll('.flip-container');
 
-const botaoComecar = document.getElementById('btn-comecar');
+    flipContainers.forEach(container => {
+        container.addEventListener('click', function() {
+            this.classList.toggle('flip');
+        });
+    });
 
-botaoComecar.addEventListener('click', function() {
-    console.log("Iniciando redirecionamento para o cadastro...");
-    window.location.href = "Cadastro.html"; 
+    const botaoComecar = document.getElementById('btn-comecar');
+    if (botaoComecar) {
+        botaoComecar.addEventListener('click', function() {
+            window.location.href = "Cadastro.html"; 
+        });
+    }
 });

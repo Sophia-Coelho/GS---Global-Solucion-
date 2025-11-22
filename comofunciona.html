@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillUp - Como Funciona</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="/CSS/Rodape.css">
     <link rel="stylesheet" href="/CSS/comofunciona.css">
     <link rel="stylesheet" href="/CSS/Home.css">
@@ -16,172 +17,154 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-<div class="container-fluid nav-grid">
+        <div class="container-fluid nav-grid">
+            <div class="nav-col-left"></div>
+            <div class="navbar-center-group d-flex align-items-center justify-content-center">
+                <a class="nav-link" href="/Home.html">Início</a>
+                <a class="nav-link" href="/comofunciona.html">Como Funciona</a>
+                <a class="nav-link" href="/QuemSomos.html">Quem Somos</a>
+                <a class="navbar-center d-flex align-items-center" href="#">
+                    <img src="./img/logo.png" class="logo-center-img" alt="Logo SkillUp">
+                    <span class="logo-text">SkillsUp</span>
+                </a>
+                <a class="nav-link" id="cadastroNav" href="/Cadastro.html">Cadastro</a>
+                <a class="nav-link" href="/tutor.html">Tutor</a>
+                <a class="nav-link" href="#" onclick="verificarLogin('/ofereca_aula.html')">Oferecer Aulas</a>
+            </div>
+            <div class="nav-col-right">
+                <a class="btn btn-conta" href="/agendamentos.html">Perfil</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="nav-col-left"></div>
-    <div class="navbar-center-group d-flex align-items-center justify-content-center">
-    <a class="nav-link" href="/Home.html">Início</a>
-    <a class="nav-link" href="/comofunciona.html">Como Funciona</a>
-    <a class="nav-link" href="/QuemSomos.html">Quem Somos</a>
-    <a class="navbar-center d-flex align-items-center" href="#">
-        <img src="./img/logo.png" class="logo-center-img" alt="Logo SkillUp">
-        <span class="logo-text">SkillsUp</span>
-    </a>
+    <div class="container py-5 comofunciona">
 
-    <a class="nav-link" id="cadastroNav" href="/Cadastro.html">Cadastro</a>
-    <a class="nav-link" href="/tutor.html">Tutor</a>
-    <a class="nav-link" href="#" onclick="verificarLogin('/ofereca_aula.html')">
-    Oferecer Aulas
-</a>
+        <h1 class="text-center mb-2">Como funciona o SkillsUp?</h1>
+        <p class="subtitle text-center mb-5">
+            Simples, colaborativo e sem barreiras financeiras.
+        </p>
 
-    </div>
-
-    <div class="nav-col-right">
-    <a class="btn btn-conta" href="/agendamentos.html">Perfil</a>
-    </div>
-
-</div>
-</nav>
-
-<div class="container py-5 comofunciona">
-
-    <h1 class="text-center mb-2">Como funciona o SkillsUp?</h1>
-    <p class="subtitle text-center mb-5">
-        Simples, colaborativo e sem barreiras financeiras.
-    </p>
+        <div class="row g-4">
 
     <div class="row g-4">
 
-        <!-- Card 1 -->
-        <div class="col-md-4">
-            <div class="card h-100 text-center p-4 shadow-sm">
-                <div class="mb-3">
-                    <img src="img/chapeu.png" alt="Ícone de chapéu de formatura" class="img-fluid" style="width: 60px;">
+            <div class="col-md-4">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="flip-card-inner front shadow-sm">
+                            <div class="mb-3">
+                                <i class="bi bi-mortarboard-fill card-icon"></i>
+                            </div>
+                            <h3 class="h5">Aprenda o que quiser</h3>
+                            <p class="text-muted">Acesse conhecimento de tutores especializados em diversas áreas</p>
+                        </div>
+                        <div class="flip-card-inner back shadow-sm">
+                            <h3>Como aprender?</h3>
+                            <p>Utilize suas skillscoins para aprender algo novo, busque por matéria, agende horários flexíveis com tutores e aprenda os mais variados assuntos.</p>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="h5">Aprenda o que quiser</h3>
-                <p class="text-muted">
-                    Acesse conhecimento de tutores especializados em diversas áreas
-                </p>
             </div>
-        </div>
 
-        <!-- Card 2 -->
-        <div class="col-md-4">
-            <div class="card h-100 text-center p-4 shadow-sm">
-                <div class="mb-3">
-                    <img src="img/livros.png" alt="Ícone de livros" class="img-fluid" style="width: 60px;">
+            <div class="col-md-4">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="flip-card-inner front shadow-sm">
+                            <div class="mb-3">
+                                <i class="bi bi-journal-bookmark-fill card-icon"></i>
+                            </div>
+                            <h3 class="h5">Ensine o que domina</h3>
+                            <p class="text-muted">Compartilhe sua expertise e ajude outras pessoas a aprenderem</p>
+                        </div>
+                        <div class="flip-card-inner back shadow-sm">
+                            <h3>Seja um Tutor</h3>
+                            <p>Cadastre suas habilidades, defina sua disponibilidade e ganhe reputação na comunidade ajudando outros alunos.</p>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="h5">Ensine o que domina</h3>
-                <p class="text-muted">
-                    Compartilhe sua expertise e ajude outras pessoas a aprenderem
-                </p>
             </div>
-        </div>
 
-        <!-- Card 3 -->
-        <div class="col-md-4">
-            <div class="card h-100 text-center p-4 shadow-sm">
-                <div class="mb-3">
-                    <img src="img/estrelas.png" alt="Ícone de três estrelas" class="img-fluid" style="width: 60px;">
+            <div class="col-md-4">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="flip-card-inner front shadow-sm">
+                            <div class="mb-3">
+                                <i class="bi bi-stars card-icon"></i>
+                            </div>
+                            <h3 class="h5">Ganhe créditos</h3>
+                            <p class="text-muted">Continue aprendendo através da troca de conhecimento</p>
+                        </div>
+                        <div class="flip-card-inner back shadow-sm">
+                            <h3>Economia Colaborativa</h3>
+                            <p>Cada aula dada gera skillscoins que você pode usar para "pagar" por aulas de assuntos que você quer aprender.</p>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="h5">Ganhe créditos</h3>
-                <p class="text-muted">
-                    Continue aprendendo através da troca de conhecimento
-                </p>
             </div>
+
         </div>
-
-    </div>
-
-    <div class="text-center mt-5">
-        <button class="btn btn-primary btn-lg text-uppercase" id="btn-comecar">
-            Começar Agora
-        </button>
-    </div>
 
 </div>
-
-<footer class="footer-bg text-white mt-auto py-5 rodape">
-        <section class="container text-center mb-4">
-        <h3 class="fw-bold">Fique por dentro das nossas redes!</h3>
-        <div class="d-flex justify-content-center gap-4 mt-3 fs-3">
-            <a href="https://x.com/" class="text-white"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.instagram.com/" class="text-white"><i class="bi bi-instagram"></i></a>
-            <a href="https://pt-br.facebook.com/" class="text-white"><i class="bi bi-facebook"></i></a>
         </div>
-        <hr class="my-4 mx-auto opacity-75" style="width:60%;">
-        </section>
-
-    <section class="container">
-        <div class="row gy-4 text-center text-md-start">
-
-        <div class="col-md-3 d-flex flex-column align-items-center align-items-md-start">
-            <img src="/img/logo.png" alt="Logotipo AgroViva Web" class="footer-logo mb-2">
+        <div class="text-center mt-5">
+            <button class="btn btn-primary btn-lg text-uppercase" id="btn-comecar">
+                Começar Agora
+            </button>
         </div>
 
-        <nav class="col-md-3" aria-label="Navegação do rodapé">
-            <h3 class="h5 fw-bold">Navegação</h3>
-            <ul class="list-unstyled">
-            <li><a href="/Home.html" class="text-white text-decoration-none">Home</a></li>
-            <li><a href="/comofunciona.html" class="text-white text-decoration-none">Como funciona</a></li>
-            <li><a href="/Cadastro.html" class="text-white text-decoration-none">Cadastro</a></li>
-            <li><a href="/tutor.html" class="text-white text-decoration-none">Tutor</a></li>
-            <li><a href="" class="text-white text-decoration-none">Perfil</a></li>
-        </nav>
-
-        <section class="col-md-3 servicos">
-            <h3 class="h5 fw-bold">Serviços</h3>
-            <ul class="list-unstyled">
-                <li>Troca de conhecimento</li>
-                <li>Moeda interna</li>
-                <li>Ensinar gera créditos</li>
-                <li>Aprender consome créditos</li>
-            </ul>
-        </section>
-
-        <section class="col-md-3">
-            <h3 class="h5 fw-bold">Contato</h3>
-            <ul class="list-unstyled">
-                <li>SkillsUp@gmail.com</li>
-                <li>+55 11 94733-4726</li>
-            </ul>
-        </section>
-        </div>
-
-        <div class="border-top mt-4 pt-3 text-center small opacity-75">
-            © 2025 <strong>SkillsUp</strong>. Todos os direitos reservados. |
-            <a>Política de Privacidade</a> |
-            <a>Termos de Uso</a>
-        </div>
-    </section>
-</footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <!--plugin VLibras para garantir acessibilidade-->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
     </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-    <script src="https://cdn.userway.org/widget.js" data-account="9AycmX4hek"></script>
 
-    <!-- Scripts -->
+    <footer class="footer-bg text-white mt-auto py-5 rodape">
+        <section class="container text-center mb-4">
+            <h3 class="fw-bold">Fique por dentro das nossas redes!</h3>
+            <div class="d-flex justify-content-center gap-4 mt-3 fs-3">
+                <a href="https://x.com/" class="text-white"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.instagram.com/" class="text-white"><i class="bi bi-instagram"></i></a>
+                <a href="https://pt-br.facebook.com/" class="text-white"><i class="bi bi-facebook"></i></a>
+            </div>
+            <hr class="my-4 mx-auto opacity-75" style="width:60%;">
+        </section>
+
+        <section class="container">
+            <div class="row gy-4 text-center text-md-start">
+                <div class="col-md-3 d-flex flex-column align-items-center align-items-md-start">
+                    <img src="/img/logo.png" alt="Logotipo" class="footer-logo mb-2">
+                </div>
+                <nav class="col-md-3">
+                    <h3 class="h5 fw-bold">Navegação</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="/Home.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="/comofunciona.html" class="text-white text-decoration-none">Como funciona</a></li>
+                        <li><a href="/Cadastro.html" class="text-white text-decoration-none">Cadastro</a></li>
+                        <li><a href="/tutor.html" class="text-white text-decoration-none">Tutor</a></li>
+                        <li><a href="" class="text-white text-decoration-none">Perfil</a></li>
+                    </ul>
+                </nav>
+                <section class="col-md-3 servicos">
+                    <h3 class="h5 fw-bold">Serviços</h3>
+                    <ul class="list-unstyled">
+                        <li>Troca de conhecimento</li>
+                        <li>Moeda interna</li>
+                        <li>Ensinar gera créditos</li>
+                        <li>Aprender consome créditos</li>
+                    </ul>
+                </section>
+                <section class="col-md-3">
+                    <h3 class="h5 fw-bold">Contato</h3>
+                    <ul class="list-unstyled">
+                        <li>SkillsUp@gmail.com</li>
+                        <li>+55 11 94733-4726</li>
+                    </ul>
+                </section>
+            </div>
+            <div class="border-top mt-4 pt-3 text-center small opacity-75">
+                © 2025 <strong>SkillsUp</strong>. Todos os direitos reservados.
+            </div>
+        </section>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="/JS/global.js"></script>
-    <script src="./JS/ofereca_aula.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-<script src="/JS/global.js"></script>
-<script src="/JS/Cadastro.js"></script>
-<script src="/JS/comofunciona.js"></script>
+    <script src="/JS/comofunciona.js"></script>
 </body>
 </html>
