@@ -310,6 +310,40 @@ function gerarCardAula(aula) {
 
 
   
+  // ====================================================================
+  // ✅ BLOCO DO DESIGN — FIXADO NO PONTO CORRETO  
+  // ====================================================================
+  const navbar = document.querySelector(".navbar");
+  const skillsCoins = document.querySelector(".skillsCoinsBox");
+  const voltarBtn = document.querySelector(".voltar");
+
+  if (navbar && skillsCoins && voltarBtn) {
+
+    function checarColisao() {
+      const navBottom = navbar.getBoundingClientRect().bottom;
+      const skillsTop = skillsCoins.getBoundingClientRect().top;
+      const voltarTop = voltarBtn.getBoundingClientRect().top;
+
+      if (skillsTop <= navBottom || voltarTop <= navBottom) {
+        skillsCoins.style.opacity = "0";
+        skillsCoins.style.pointerEvents = "none";
+
+        voltarBtn.style.opacity = "0";
+        voltarBtn.style.pointerEvents = "none";
+      } 
+      else {
+        skillsCoins.style.opacity = "1";
+        skillsCoins.style.pointerEvents = "auto";
+
+        voltarBtn.style.opacity = "1";
+        voltarBtn.style.pointerEvents = "auto";
+      }
+    }
+
+    window.addEventListener("scroll", checarColisao);
+    checarColisao();
+  }
+
 
   // finalmente: handlers para os cards estáticos presentes no HTML
   attachDescricaoHandlers(document);
