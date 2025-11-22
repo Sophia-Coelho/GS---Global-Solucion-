@@ -12,44 +12,32 @@ document.addEventListener("DOMContentLoaded", function () {
     const creditModalEl = document.getElementById('creditModal');
     const creditBadge = document.getElementById("creditos");
 
-    // =========================
-    // Função para atualizar badge e disparar alert se 0
-    // =========================
+    // Inicializa créditos
+    if (!localStorage.getItem("creditos")) {
+        localStorage.setItem("creditos", "0");
+    }
+
+    // Atualiza badge de créditos
     function atualizarBadge() {
         const creditos = Number(localStorage.getItem("creditos") || 0);
         if (creditBadge) creditBadge.textContent = creditos;
+    }
 
+    // Mostra alerta de 0 coins se necessário
+    function verificarZeroCredits() {
+        const creditos = Number(localStorage.getItem("creditos") || 0);
         if (creditos <= 0) {
-            alert("Você ficou sem Skills Coins! Para continuar aprendendo, ofereça aulas.");
+            alert(
+                "Se você gostou da experiência e quer continuar consumindo os conteúdos,\n" +
+                "pode conseguir mais Skill Coins oferecendo aulas!"
+            );
         }
     }
 
-    // =========================
-    // Funções para adicionar/remover créditos
-    // =========================
-    function adicionarCreditos(qtd) {
-        let creditos = Number(localStorage.getItem("creditos") || 0);
-        creditos += qtd;
-        localStorage.setItem("creditos", creditos);
-        atualizarBadge();
-    }
-
-    function removerCreditos(qtd) {
-        let creditos = Number(localStorage.getItem("creditos") || 0);
-        creditos = Math.max(0, creditos - qtd);
-        localStorage.setItem("creditos", creditos);
-        atualizarBadge();
-    }
-
-    // Inicializa créditos
-    if (localStorage.getItem("creditos") === null) {
-        localStorage.setItem("creditos", "0");
-    }
     atualizarBadge();
+    verificarZeroCredits();
 
-    // =========================
-    // Função para mostrar tela de escolha
-    // =========================
+    // Mostra tela de escolha
     function mostrarEscolha() {
         const n = localStorage.getItem("nomeUsuario") || "Usuário";
         if (nomeSpan) nomeSpan.textContent = n;
@@ -64,17 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Verifica se já existe cadastro
+    // Se já cadastrado, mostra tela de escolha
     const jaCadastrado = !!localStorage.getItem("nomeUsuario");
-
     if (jaCadastrado) {
         if (profileWrapper) profileWrapper.classList.add('d-none');
         mostrarEscolha();
     }
 
-    // =========================
     // Salvar cadastro
-    // =========================
     if (salvarBtn) {
         salvarBtn.addEventListener("click", function () {
 
@@ -96,17 +81,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // Verifica se o usuário existia antes
             const usuarioExistiaAntes = !!localStorage.getItem("nomeUsuario");
 
-            // Salva nome do usuário
+            // Salva nome
             localStorage.setItem("nomeUsuario", nome.value.trim());
 
-            // =========================
             // Só adiciona 5 créditos se nunca existiu antes
-            // =========================
             if (!usuarioExistiaAntes && localStorage.getItem("creditos") === "0") {
                 localStorage.setItem("creditos", "5");
+
                 if (creditModalEl) {
                     const modal = new bootstrap.Modal(creditModalEl);
                     modal.show();
@@ -118,16 +101,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Remove aviso de erro ao digitar
+    // Remove erro ao digitar
     ["nome", "aprender", "ensinar"].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener("input", () => el.classList.remove("is-invalid"));
     });
 
-    // =========================
-    // Disponibiliza funções globalmente
-    // =========================
-    window.adicionarCreditos = adicionarCreditos;
-    window.removerCreditos = removerCreditos;
+    // Funções globais para adicionar/remover créditos
+    window.adicionarCreditos = qtd => {
+        const creditos = Number(localStorage.getItem("creditos") || 0) + qtd;
+        localStorage.setItem("creditos", creditos);
+        atualizarBadge();
+    };
+
+    window.removerCreditos = qtd => {
+        let creditos = Number(localStorage.getItem("creditos") || 0) - qtd;
+        if (creditos < 0) creditos = 0;
+        localStorage.setItem("creditos", creditos);
+        atualizarBadge();
+        verificarZeroCredits(); // <<-- chama o alert imediatamente ao zerar
+    };
 
 });

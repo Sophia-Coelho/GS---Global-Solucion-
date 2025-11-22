@@ -19,17 +19,17 @@
 
 /* BOTÃO VOLTAR */
 .btn-dark.btn-sm {
-    background: linear-gradient(90deg, #6c63ff, #2dd4bf) !important;
-    border:#fff;
-    color: #fff;
-    margin-right: 500px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
+    background: white;
+    border: none;
+    color: black;
+    text-align: center;
+    margin-right: 70%;
+    font-size: 20px;
     margin-top: 80px;
 }
 
 .btn-dark.btn-sm:hover {
+    text-decoration: none !important;
     opacity: 0.9;
 }
 
@@ -160,9 +160,11 @@
     align-items: center;
     gap: 8px;
 }
+
 .badge-coins {
     font-size: 1.1rem;
 }
+
 .mensagem-coins {
     background: #fff7c4;
     padding: 8px 12px;
@@ -171,8 +173,7 @@
     font-size: .9rem;
     text-align: center;
     border: 1px solid #d8c53b;
-    display: none; /* inicia escondido */
-    transition: opacity 0.3s ease;
+    display: none; /* inicialmente escondido */
 }
 
 @media (max-width: 576px) {

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -11,110 +12,97 @@
     <link rel="stylesheet" href="/CSS/Cadastro.css">
     <link rel="stylesheet" href="/CSS/Home.css">
     <link rel="stylesheet" href="/CSS/Rodape.css">
-        <title>Seu Perfil</title>
+    <title>Seu Perfil</title>
 </head>
 <body>
 
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-<div class="container-fluid nav-grid">
+        <div class="container-fluid nav-grid">
+            <div class="nav-col-left"></div>
+            <div class="navbar-center-group d-flex align-items-center justify-content-center">
+                <a class="nav-link" href="/Home.html">Início</a>
+                <a class="nav-link" href="/comofunciona.html">Como Funciona</a>
+                <a class="nav-link" href="/QuemSomos.html">Quem Somos</a>
+                <a class="navbar-center d-flex align-items-center" href="#">
+                    <img src="./img/logo.png" class="logo-center-img" alt="Logo SkillUp">
+                    <span class="logo-text">SkillsUp</span>
+                </a>
+                <a class="nav-link" id="cadastroNav" href="/Cadastro.html">Cadastro</a>
+                <a class="nav-link" href="/tutor.html">Tutor</a>
+                <a class="nav-link" href="#" onclick="verificarLogin('/ofereca_aula.html')">Oferecer Aulas</a>
+            </div>
+            <div class="nav-col-right">
+                <a class="btn btn-conta" href="/agendamentos.html">Perfil</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="nav-col-left"></div>
-    <div class="navbar-center-group d-flex align-items-center justify-content-center">
-    <a class="nav-link" href="/Home.html">Início</a>
-    <a class="nav-link" href="/comofunciona.html">Como Funciona</a>
-    <a class="nav-link" href="/QuemSomos.html">Quem Somos</a>
-    <a class="navbar-center d-flex align-items-center" href="#">
-        <img src="./img/logo.png" class="logo-center-img" alt="Logo SkillUp">
-        <span class="logo-text">SkillsUp</span>
-    </a>
-
-    <a class="nav-link" id="cadastroNav" href="/Cadastro.html">Cadastro</a>
-    <a class="nav-link" href="/tutor.html">Tutor</a>
-    <a class="nav-link" href="#" onclick="verificarLogin('/ofereca_aula.html')">
-    Oferecer Aulas
-</a>
-
-    </div>
-
-    <div class="nav-col-right">
-    <a class="btn btn-conta" href="/agendamentos.html">Perfil</a>
-    </div>
-
-</div>
-</nav>
-
-<!-- CONTADOR DE CRÉDITOS (SKILLS COINS) SEMPRE VISÍVEL -->
+<!-- CONTADOR DE CRÉDITOS -->
 <div id="skillsCoinsBox" class="text-center mt-3">
-
     <span class="badge badge-coins">
         SKILLS COINS: <span id="creditos">0</span>
     </span>
-
-    <div id="mensagemCoins" class="mensagem-coins" style="display: none;">
-        Se você gostou da experiência e quer continuar consumindo os conteúdos,
-        pode conseguir mais Skill Coins oferecendo aulas
-    </div>
-
+    <div id="mensagemCoins" class="small text-danger mt-2" style="display:none;"></div>
 </div>
 
-<div class="gradient-bg d-flex justify-content-center align-items-center vh-100">
-    <div class="container text-center">
-        <a href="/Home.html" class="btn btn-dark btn-sm mb-4">Voltar</a>
-        <div class="card p-4 mx-auto" style="max-width: 600px; margin-top: 10px;">
-            <h3 class="mb-3">Seu Perfil</h3>
-            <div class="mb-3 text-start">
-                <label class="form-label">Nome Completo</label>
-                <input type="text" class="form-control" id="nome" placeholder="Nome...">
-                <div class="invalid-feedback">Preencha este campo.</div>
+
+    <!-- TELA DE PERFIL (aparece apenas antes do cadastro) -->
+    <div class="gradient-bg d-flex justify-content-center align-items-center vh-100">
+        <div class="container text-center">
+            <a href="/Home.html" class="bi bi-arrow-left btn btn-dark btn-sm mb-4">Voltar</a>
+            <div class="card p-4 mx-auto" style="max-width: 600px; margin-top: 10px;">
+                <h3 class="mb-3">Seu Perfil</h3>
+                <div class="mb-3 text-start">
+                    <label class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Nome...">
+                    <div class="invalid-feedback">Preencha este campo.</div>
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label">Áreas que quer aprender</label>
+                    <input type="text" class="form-control" id="aprender" placeholder="Ex. Programação, Design, Idiomas">
+                    <div class="invalid-feedback">Preencha este campo.</div>
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label">Áreas que pode ensinar</label>
+                    <input type="text" class="form-control" id="ensinar" placeholder="Ex. Matemática, Música, Marketing">
+                    <div class="invalid-feedback">Preencha este campo.</div>
+                </div>
+                <button class="btn btn-primary w-100" id="salvarBtn">Salvar</button>
             </div>
-            <div class="mb-3 text-start">
-                <label class="form-label">Áreas que quer aprender</label>
-                <input type="text" class="form-control" id="aprender" placeholder="Ex. Programação, Design, Idiomas">
-                <div class="invalid-feedback">Preencha este campo.</div>
-            </div>
-            <div class="mb-3 text-start">
-                <label class="form-label">Áreas que pode ensinar</label>
-                <input type="text" class="form-control" id="ensinar" placeholder="Ex. Matemática, Música, Marketing">
-                <div class="invalid-feedback">Preencha este campo.</div>
-            </div>
-            <button class="btn btn-primary w-100" id="salvarBtn">Salvar</button>
         </div>
-
-
     </div>
-</div>
 
-<!-- POPUP -->
-<div class="modal fade" id="creditModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center p-3">
-        <h5 class="mb-2">Perfil salvo!</h5>
-        <p><strong>VOCÊ GANHOU CINCO SKILLS COINS</strong></p>
-        <button class="btn btn-success" data-bs-dismiss="modal">OK</button>
-    </div>
-    </div>
-</div>
-
-<div class="tela-escolha-bg d-flex flex-column justify-content-center align-items-center py-5"> 
-    <div class="card escolha-card p-4 text-center" style="max-width: 600px; margin-top: 50px;">
-        <h3 class="fw-semibold text-primary mb-4">
-            <span id="nomeUsuario"></span>, o que deseja fazer? 
-        </h3>
-        <div class="botoes-centro">
-            <a href="/tutor.html" class="btn escolha-btn btn-grad-1">APRENDER ALGO NOVO</a>
-            <a href="/ofereca_aula.html" class="btn escolha-btn btn-grad-2">ENSINAR ALGO</a>
-            <a href="/agendamentos.html" class="btn escolha-btn btn-grad-3">MINHAS AULAS</a>
+    <!-- TELA DE ESCOLHA (aparece após cadastro) -->
+    <div class="tela-escolha-bg d-flex flex-column justify-content-center align-items-center py-5 d-none">
+        <div class="card escolha-card p-4 text-center" style="max-width: 600px; margin-top: 50px;">
+            <h3 class="fw-semibold text-primary mb-4">
+                <span id="nomeUsuario"></span>, o que deseja fazer? 
+            </h3>
+            <div class="botoes-centro">
+                <a href="/tutor.html" class="btn escolha-btn btn-grad-1">APRENDER ALGO NOVO</a>
+                <a href="/ofereca_aula.html" class="btn escolha-btn btn-grad-2">ENSINAR ALGO</a>
+                <a href="/agendamentos.html" class="btn escolha-btn btn-grad-3">MINHAS AULAS</a>
+            </div>
+            <p class="mt-4 small fw-semibold">Dica: Ensine para continuar aprendendo!</p>
         </div>
-        <p class="mt-4 small fw-semibold">
-            Dica: Ensine para continuar aprendendo!
-        </p>
     </div>
-</div>
 
-<footer class="footer-bg text-white **mt-5** py-5">
+    <!-- MODAL DE CRÉDITOS -->
+    <div class="modal fade" id="creditModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-3">
+                <h5 class="mb-2">Perfil salvo!</h5>
+                <p><strong>VOCÊ GANHOU CINCO SKILLS COINS</strong></p>
+                <button class="btn btn-success" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+
+<footer class="footer-bg text-white mt-auto py-5">
         <section class="container text-center mb-4">
-            <h3 class="fw-bold">Fique por dentro das nossas redes!</h3>
-            <div class="d-flex justify-content-center gap-4 mt-3 fs-3">
+        <h3 class="fw-bold">Fique por dentro das nossas redes!</h3>
+        <div class="d-flex justify-content-center gap-4 mt-3 fs-3">
             <a href="https://x.com/" class="text-white"><i class="bi bi-twitter-x"></i></a>
             <a href="https://www.instagram.com/" class="text-white"><i class="bi bi-instagram"></i></a>
             <a href="https://pt-br.facebook.com/" class="text-white"><i class="bi bi-facebook"></i></a>
@@ -124,8 +112,9 @@
 
     <section class="container">
         <div class="row gy-4 text-center text-md-start">
+
         <div class="col-md-3 d-flex flex-column align-items-center align-items-md-start">
-            <img src="/img/logo.png" alt="Logo SkillsUp" class="footer-logo mb-2">
+            <img src="/img/logo.png" alt="Logotipo AgroViva Web" class="footer-logo mb-2">
         </div>
 
         <nav class="col-md-3" aria-label="Navegação do rodapé">
@@ -136,16 +125,15 @@
             <li><a href="/Cadastro.html" class="text-white text-decoration-none">Cadastro</a></li>
             <li><a href="/tutor.html" class="text-white text-decoration-none">Tutor</a></li>
             <li><a href="" class="text-white text-decoration-none">Perfil</a></li>
-            </ul>
         </nav>
 
         <section class="col-md-3">
             <h3 class="h5 fw-bold">Serviços</h3>
             <ul class="list-unstyled">
-            <li>Troca de conhecimento</li>
-            <li>Moeda interna</li>
-            <li>Ensinar gera créditos</li>
-            <li>Aprender consome créditos</li>
+                <li>Troca de conhecimento</li>
+                <li>Moeda interna</li>
+                <li>Ensinar gera créditos</li>
+                <li>Aprender consome créditos</li>
             </ul>
         </section>
 
@@ -159,10 +147,12 @@
         </div>
 
         <div class="border-top mt-4 pt-3 text-center small opacity-75">
-            © 2025 <strong>SkillsUp</strong>. Todos os direitos reservados. | Política de Privacidade | Termos de Uso
+            © 2025 <strong>SkillsUp</strong>. Todos os direitos reservados. |
+            <a>Política de Privacidade</a> |
+            <a>Termos de Uso</a>
         </div>
     </section>
-    </footer>
+</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
@@ -170,7 +160,6 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <!--plugin VLibras para garantir acessibilidade-->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
         <div vw-plugin-wrapper>
@@ -183,11 +172,10 @@
     </script>
     <script src="https://cdn.userway.org/widget.js" data-account="9AycmX4hek"></script>
 
-    <script src="./JS/ofereca_aula.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/JS/global.js"></script>
-<script src="/JS/Cadastro.js"></script>
-<script src="./JS/ofereca_aula.js"></script>
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/JS/global.js"></script>
+    <script src="/JS/Cadastro.js"></script>
+    <script src="/JS/ofereca_aula.js"></script>
 </body>
-</html>
+</html>     
