@@ -1,3 +1,9 @@
+.body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Quicksand', 'Roboto', sans-serif !important;
+}
+
 #userwayAccessibilityIcon {
   margin-top: 250px !important; /* ajusta a posição vertical do ícone */
   z-index: 9999 !important;   /* garante que o botão fique acima de outros elementos */

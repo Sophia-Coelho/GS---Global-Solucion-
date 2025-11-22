@@ -16,7 +16,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Garante que o body ocupe no mínimo a altura da tela */
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Quicksand', 'Roboto', sans-serif !important;
 }
 
 #userwayAccessibilityIcon {

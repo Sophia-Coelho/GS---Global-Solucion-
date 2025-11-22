@@ -1,3 +1,9 @@
+.body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Quicksand', 'Roboto', sans-serif !important;
+}
+
 .gradient-bg {
     background: linear-gradient(
         90deg,
@@ -142,8 +148,6 @@
     display: none;
 }
 
-/* quando for mostrado via JS vamos usar a classe bootstrap d-flex */
-/* Estilos extras já enviados antes */
 .escolha-card {
     max-width: 600px;
     width: 90%;
