@@ -32,42 +32,36 @@ document.addEventListener("DOMContentLoaded", () => {
   let animCreditos = null;
   let animSelecione = null;
   let animSucesso = null;
-
-  // ========== MODAIS FECHAM SOMENTE APÓS A LOTTIE TERMINAR ==========
+  
+  // ========== MODAIS AGORA SÓ FECHAM PELO BOTÃO ==========
 
   // Créditos esgotados
   document.getElementById("modalCreditosEsgotados").addEventListener("shown.bs.modal", () => {
-    const modal = bootstrap.Modal.getInstance(document.getElementById("modalCreditosEsgotados"));
     animCreditos = playLottie(
       document.getElementById("lottieCreditos"),
       animCreditos,
       "/assets/lottie/sad.json",
-      () => modal?.hide()
+      null // ❌ remove o fechamento automático
     );
   });
 
   // Selecione horário
   document.getElementById("modalSelecioneHorario").addEventListener("shown.bs.modal", () => {
-    const modalSelec = bootstrap.Modal.getInstance(document.getElementById("modalSelecioneHorario"));
     animSelecione = playLottie(
       document.getElementById("lottieSelecione"),
       animSelecione,
       "/assets/lottie/clock.json",
-      () => {
-        modalSelec.hide();
-        new bootstrap.Modal(document.getElementById("agendarModal")).show();
-      }
+      null // ❌ remove o fechamento automático
     );
   });
 
   // Sucesso
   document.getElementById("modalAgendado").addEventListener("shown.bs.modal", () => {
-    const modalOk = bootstrap.Modal.getInstance(document.getElementById("modalAgendado"));
     animSucesso = playLottie(
       document.getElementById("checkLottie"),
       animSucesso,
       "/assets/lottie/success.json",
-      () => modalOk?.hide()
+      null // ❌ remove o fechamento automático
     );
   });
 
