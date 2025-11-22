@@ -1,6 +1,16 @@
 // JS/tutor.js — versão corrigida e robusta
 document.addEventListener("DOMContentLoaded", () => {
 
+  const container = document.querySelector('.tutor-grid');
+  if (!container) return;
+
+  const aulasPublicadas = JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
+
+  aulasPublicadas.forEach(aula => {
+    const card = gerarCardAula(aula);
+    container.appendChild(card);
+  });
+
   // container principal (onde há os cards estáticos e onde adicionaremos os dinâmicos)
   const track = document.getElementById("tutorGrid");
 
@@ -79,6 +89,55 @@ function atualizarCreditos() {
 // inicializa exibição
 atualizarCreditos();
 
+
+
+
+function gerarCardAula(aula) {
+    const card = document.createElement('div');
+  card.classList.add('tutor-card');
+
+  // atributos para popup e filtros
+  card.dataset.area = aula.categoria || "geral";
+  card.dataset.nome = aula.nomeTutor;
+  card.dataset.descricao = aula.descricao;
+
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // CORREÇÃO FUNDAMENTAL — SEM ISSO HORÁRIOS NÃO APARECEM
+  card.dataset.horarios = JSON.stringify(aula.horarios || []);
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  // HTML interno — IDÊNTICO AO SEU CARD MODELO
+  card.innerHTML = `
+    <h5>${aula.nomeTutor}</h5>
+    <p class="categoria-tutor">${aula.categoria}</p>
+    <p class="descricao-tutor">${aula.assunto}</p>
+
+    <div class="stars">⭐⭐⭐⭐</div>
+
+    <button class="btn btn-agendar w-100 btn-agendar-dinamico">
+      Agendar
+    </button>
+
+    <button class="btn btn-outline-primary w-100 mt-2 btn-descricao">
+      Ver descrição
+    </button>
+  `;
+
+  // Ações do botão de descrição (mesmo sistema usado nos outros cards)
+  card.querySelector('.btn-descricao').addEventListener('click', () => {
+    abrirModalDescricao(aula.nomeTutor, aula.assunto, aula.descricao);
+  });
+
+  // Ações do botão Agendar (idêntico aos outros)
+  card.querySelector('.btn-agendar-dinamico').addEventListener('click', (e) => {
+    abrirModalAgendamento(aula);
+  });
+
+  return card;
+}
+
+
+
   
   // ========================= LOCALSTORAGE AGENDAMENTOS =========================
   let aulasAgendadas = JSON.parse(localStorage.getItem("aulasAgendadas")) || [];
@@ -155,7 +214,7 @@ atualizarCreditos();
     attachAgendarHandlers(track);
   }
 
-  carregarAulasPublicadas();
+
 
   // ========================= AGENDA / HORÁRIOS =========================
   function onAgendarClick(e) {
@@ -248,6 +307,9 @@ atualizarCreditos();
       if (ag) new bootstrap.Modal(ag).show();
     });
   }
+
+
+  
 
   // finalmente: handlers para os cards estáticos presentes no HTML
   attachDescricaoHandlers(document);
