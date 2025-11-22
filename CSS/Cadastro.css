@@ -59,21 +59,27 @@
     opacity: 0.9;
 }
 
-/* CONTADOR */
-.badge {
-        background: linear-gradient(180deg, #997300, #ffc000) !important;
+/* BADGE DE SKILL COINS */
+.badge-coins {
+    position: fixed;
+    right: 40px;               /* distância da lateral direita */
+    top: 20%;                  /* alinhamento vertical */
+    transform: translateY(-50%);
+    z-index: 9999;
+
+    /* estilos que você enviou */
+    background: linear-gradient(180deg, #997300, #ffc000) !important;
     border: none !important;
     color: #fff !important;
-    padding: 10px 18px;
-    border-radius: 20px;
-    font-weight: 600;
-    transition: opacity 0.3s ease;
     padding: 15px 25px !important;
     font-size: 22px !important;
     border-radius: 40px !important;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
 }
 
-.badge:hover {
+/* Hover opcional */
+.badge-coins:hover {
     opacity: 0.85;
 }
 
@@ -143,6 +149,26 @@
     width: 90%;
     border-radius: 25px;
 }
+
+.badge-coins {
+    background: #ffc107;
+    color: #000;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+}
+
+.mensagem-coins {
+    background: #fff8d8;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid #f2c94c;
+    font-size: 0.95rem;
+    max-width: 450px;
+    margin: 10px auto 0;
+}
+
 
 @media (max-width: 576px) {
     .card {

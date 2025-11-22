@@ -3,19 +3,27 @@ function mostrarModalComContagem(segundos, mensagem, destino) {
   const modal = document.createElement("div");
   modal.id = "modalBloqueio";
   modal.style.cssText = `
-    position: fixed; z-index: 9999; top:0; left:0; width:100%; height:100%;
-    background-color: rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;
+    position: fixed;
+    z-index: 999999;
+    top:0; left:0; width:100%; height:100%;
+    background-color: rgba(0,0,0,0.6);
+    display:flex; justify-content:center; align-items:center;
   `;
   modal.innerHTML = `
-    <div style="background:#fff; padding:2rem; border-radius:10px; text-align:center; max-width:400px; width:90%; font-family:sans-serif;">
+    <div style="background:#fff; padding:2rem; border-radius:10px;
+                text-align:center; max-width:400px; width:90%;
+                font-family:sans-serif;">
       <h2 style="margin-bottom:1rem; color:#d9534f;">Atenção!</h2>
       <p style="margin-bottom:1rem;">${mensagem}</p>
-      <p id="contadorModal" style="font-weight:bold; font-size:1.2rem; margin-top:1rem;">Redirecionando em ${segundos} segundos...</p>
+      <p id="contadorModal"
+         style="font-weight:bold; font-size:1.2rem; margin-top:1rem;">
+         Redirecionando em ${segundos} segundos...
+      </p>
     </div>
   `;
   document.body.appendChild(modal);
 
-  // Atualiza contagem regressiva a cada segundo
+  // Atualiza contagem regressiva
   const contadorEl = document.getElementById("contadorModal");
   let restante = segundos;
   const intervalo = setInterval(() => {
@@ -38,9 +46,11 @@ if (arquivoAtual === "") arquivoAtual = "index.html";
 const nome = localStorage.getItem("nomeUsuario");
 
 if (paginasProtegidas.includes(arquivoAtual) && !nome) {
-  document.documentElement.style.display = "none";
-  mostrarModalComContagem(3, "Você não tem acesso a esta página, estou te redirecionando para a tela de cadastro.", "/Cadastro.html");
-  document.documentElement.style.display = "block";
+  mostrarModalComContagem(
+    3,
+    "Você não tem acesso a esta página, estou te redirecionando para a tela de cadastro.",
+    "/Cadastro.html"
+  );
 }
 
 // ==========================
@@ -71,6 +81,20 @@ const CreditSystem = {
       ...document.querySelectorAll('#contadorCreditos')
     ];
     elementos.forEach(el => el.textContent = valor);
+
+    // Mostra ou esconde mensagem
+    this.mostrarMensagemSeZero();
+  },
+
+  mostrarMensagemSeZero() {
+    const mensagem = document.getElementById("mensagemCoins");
+    if (!mensagem) return;
+
+    if (this.get() <= 0) {
+      mensagem.style.display = "block";
+    } else {
+      mensagem.style.display = "none";
+    }
   },
 
   init() { this.updateBadge(); }
@@ -81,10 +105,11 @@ window.adicionarCreditos = qtd => CreditSystem.add(qtd);
 window.removerCreditos = qtd => CreditSystem.remove(qtd);
 window.setCreditos = qtd => CreditSystem.set(qtd);
 window.getCreditos = () => CreditSystem.get();
+
 document.addEventListener("DOMContentLoaded", () => CreditSystem.init());
 
 // ==========================
-// Função para botões de navegação com login
+// Função para botões protegidos
 // ==========================
 function verificarLogin(destino) {
   const nome = localStorage.getItem("nomeUsuario");
@@ -92,7 +117,11 @@ function verificarLogin(destino) {
   if (!nome) {
     const modalExistente = document.getElementById("modalBloqueio");
     if (!modalExistente) {
-      mostrarModalComContagem(4, "Você não tem acesso a esta página.", "/Cadastro.html");
+      mostrarModalComContagem(
+        4,
+        "Você não tem acesso a esta página.",
+        "/Cadastro.html"
+      );
     }
     return;
   }
@@ -100,39 +129,36 @@ function verificarLogin(destino) {
   window.location.href = destino;
 }
 
-
-
-// ============================================================
-// 🚀  NOVO BLOCO ADICIONADO (sem alterar nada do original)
-// ============================================================
+// ==========================
+// Navbar + Nome + Troca de Cadastro → Perfil
+// ==========================
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ========= 1. DESTACAR LINK ATUAL =========
+  // 1. Destacar link atual
   const currentPath = window.location.pathname;
   document.querySelectorAll(".nav-link").forEach(link => {
-      if (link.getAttribute("href") === currentPath) {
-          link.classList.add("active-page");
-      }
+    if (link.getAttribute("href") === currentPath) {
+      link.classList.add("active-page");
+    }
   });
 
-  // ========= 2. ALTERAR "Cadastro" → "Perfil" =========
+  // 2. Trocar Cadastro por Perfil
   const cadastroNav = document.getElementById("cadastroNav");
   const usuario = localStorage.getItem("nomeUsuario");
 
   if (cadastroNav) {
-      if (usuario) {
-          cadastroNav.textContent = "Perfil";
-          cadastroNav.href = "/agendamentos.html";
-      } else {
-          cadastroNav.textContent = "Cadastro";
-          cadastroNav.href = "/Cadastro.html";
-      }
+    if (usuario) {
+      cadastroNav.textContent = "Perfil";
+      cadastroNav.href = "/agendamentos.html";
+    } else {
+      cadastroNav.textContent = "Cadastro";
+      cadastroNav.href = "/Cadastro.html";
+    }
   }
 
-  // ========= 3. MOSTRAR NOME DO USUÁRIO EM QUALQUER TELA =========
+  // 3. Exibir nome do usuário
   const userNameDisplay = document.getElementById("userNameDisplay");
   if (userNameDisplay && usuario) {
-      userNameDisplay.textContent = usuario;
+    userNameDisplay.textContent = usuario;
   }
-
 });
