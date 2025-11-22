@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (cadastroNav) {
     if (usuario) {
       cadastroNav.textContent = "Perfil";
-      cadastroNav.href = "/agendamentos.html";
+      cadastroNav.href = "/Cadastro.html";
     } else {
       cadastroNav.textContent = "Cadastro";
       cadastroNav.href = "/Cadastro.html";

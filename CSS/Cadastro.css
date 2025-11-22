@@ -7,8 +7,8 @@
 .gradient-bg {
     background: linear-gradient(
         90deg,
-        rgba(102, 126, 234, 1) 0%,
-        rgba(118, 75, 162, 1) 100%
+    rgba(102, 126, 234, 1) 0%,
+    rgba(118, 75, 162, 1) 100%
     );
 }
 
@@ -160,11 +160,9 @@
     align-items: center;
     gap: 8px;
 }
-
 .badge-coins {
     font-size: 1.1rem;
 }
-
 .mensagem-coins {
     background: #fff7c4;
     padding: 8px 12px;
@@ -173,6 +171,8 @@
     font-size: .9rem;
     text-align: center;
     border: 1px solid #d8c53b;
+    display: none; /* inicia escondido */
+    transition: opacity 0.3s ease;
 }
 
 @media (max-width: 576px) {
