@@ -77,7 +77,7 @@
       <div class="carousel-track" id="carouselTrack">
         <!-- Os cards a seguir seguem seu markup (tutor-card). Pode adicionar mais -->
         <div class="col-card">
-          <div class="tutor-card slide-up" data-area="programação">
+          <div class="tutor-card slide-up" data-area="programação" data-nome="João Pedro">
             <h5>João Pedro</h5>
             <p>Programação</p>
             <p>⭐ ⭐ ⭐ ⭐</p>
@@ -86,16 +86,16 @@
         </div>
 
         <div class="col-card">
-          <div class="tutor-card slide-up" data-area="matemática">
+          <div class="tutor-card slide-up" data-area="matemática" data-nome="Maria">
             <h5>Maria</h5>
-            <p>Matemática</p>
+            <p>Gestão financeira</p>
             <p>⭐ ⭐ ⭐ ⭐ ⭐</p>
             <button class="btn btn-agendar">Agendar</button>
           </div>
         </div>
 
         <div class="col-card">
-          <div class="tutor-card slide-up" data-area="design">
+          <div class="tutor-card slide-up" data-area="design" data-nome="Fabíola">
             <h5>Fabíola</h5>
             <p>Design</p>
             <p>⭐ ⭐ ⭐ ⭐</p>
@@ -105,14 +105,16 @@
 
         <!-- Exemplos adicionais (aparecerão ao navegar) -->
         <div class="col-card">
-          <div class="tutor-card slide-up" data-area="física">
-            <h5>Lucas</h5><p>Física</p><p>⭐ ⭐ ⭐ ⭐</p><button class="btn btn-agendar">Agendar</button>
+          <div class="tutor-card slide-up" data-area="física" data-nome="Lucas">
+            <h5>Lucas</h5><p>Comunicação não violenta</p>
+            <p>⭐ ⭐ ⭐ ⭐</p><button class="btn btn-agendar">Agendar</button>
           </div>
         </div>
 
         <div class="col-card">
-          <div class="tutor-card slide-up" data-area="artes">
-            <h5>Ana Paula</h5><p>Artes</p><p>⭐ ⭐ ⭐</p><button class="btn btn-agendar">Agendar</button>
+          <div class="tutor-card slide-up" data-area="artes" data-nome="Ana Paula">
+            <h5>Ana Paula</h5><p>Artes</p>
+            <p>⭐ ⭐ ⭐</p><button class="btn btn-agendar">Agendar</button>
           </div>
         </div>
       </div>
@@ -156,6 +158,9 @@
       <div id="checkLottie" style="width:160px; height:160px; margin:0 auto;"></div>
       <h3 class="mt-3 text-success">Agendamento Confirmado!</h3>
       <p class="mb-3" id="confirmacaoHorario"></p>
+      <p class="fw-bold text-primary fs-5" id="msgCreditoConsumido" style="display:none;">
+        Você consumiu 1 Skill Coin
+      </p>
          <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal">Fechar</button>      
     </div>    
   </div>

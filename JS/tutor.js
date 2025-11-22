@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let animCreditos = null;
   let animSelecione = null;
   let animSucesso = null;
-  
+
   // ========== MODAIS AGORA SÓ FECHAM PELO BOTÃO ==========
 
   // Créditos esgotados
@@ -253,7 +253,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setCreditos(getCreditos() - 1);
 
     document.getElementById("confirmacaoHorario").innerText =
-      `Seu horário foi agendado para ${horarioSelecionado}.`;
+    `Aula com ${tutorAtual} agendada para ${horarioSelecionado}.`;    
+      // Mostra mensagem de crédito consumido no modal
+    document.getElementById("msgCreditoConsumido").style.display = "block";
+
 
     modalAgendar?.hide();
     new bootstrap.Modal(document.getElementById("modalAgendado")).show();
