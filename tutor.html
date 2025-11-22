@@ -156,31 +156,48 @@
       <div id="checkLottie" style="width:160px; height:160px; margin:0 auto;"></div>
       <h3 class="mt-3 text-success">Agendamento Confirmado!</h3>
       <p class="mb-3" id="confirmacaoHorario"></p>
-    </div>
+         <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal">Fechar</button>      
+    </div>    
   </div>
 </div>
+
 
 <!-- MODAL CRÉDITOS ESGOTADOS -->
 <div class="modal fade" id="modalCreditosEsgotados" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content text-center p-4">
       <div id="lottieCreditos" style="width:160px; height:160px; margin:0 auto;"></div>
+
       <h3 class="mt-3 text-danger">Créditos Esgotados</h3>
       <p class="mb-3">Você não possui créditos suficientes para agendar.</p>
+
+      <!-- 🔴 Botão obrigatório para fechar -->
+      <button type="button" class="btn btn-danger px-4 mt-2" data-bs-dismiss="modal">
+        Fechar
+      </button>
     </div>
   </div>
 </div>
+
+
 
 <!-- MODAL SELECIONE HORÁRIO -->
 <div class="modal fade" id="modalSelecioneHorario" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content text-center p-4">
       <div id="lottieSelecione" style="width:160px; height:160px; margin:0 auto;"></div>
+
       <h3 class="mt-3 text-warning">Nenhum horário selecionado</h3>
       <p class="mb-3">Escolha um horário antes de confirmar.</p>
+
+      <!-- 🟡 Botão obrigatório para fechar -->
+      <button type="button" class="btn btn-warning px-4 mt-2" data-bs-dismiss="modal">
+        Fechar
+      </button>
     </div>
   </div>
 </div>
+
 
 
 
