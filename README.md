@@ -20,8 +20,7 @@
 5. [🔄 Fluxos de Usuário](#-Fluxos-de-usuário)  
 6. [🎨 UX & Componentes Interativos](#-Ux--componentes-interativos)  
 7. [♿ Acessibilidade & Integrações](#-Acessibilidade--integrações)  
-8. [🖼️ Protótipo & Assets Visuais](#-Protótipo-Assets-Visuais)  
-9. [👥 Equipe](#-Equipe)  
+8. [👥 Equipe](#-Equipe)  
 
 ---
 
@@ -136,15 +135,6 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 
 ---
 
-## 🖼️ Protótipo e Assets Visuais
-
-- Hero slide: `./assets/hero.png`  
-- Cards “Como Funciona”: `./assets/comofunciona.png`  
-- Formulário de oferta de aula: `./assets/ofereca-aula.png`  
-- Grid de tutores & agendamento: `./assets/tutor-grid.gif`  
-
-
----
 
 ## 👥 Equipe
 
