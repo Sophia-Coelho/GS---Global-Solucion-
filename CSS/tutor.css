@@ -63,19 +63,14 @@ h1 { font-size: 2.5rem;
   top: 92px;
   right: 20px;        /* LADO OPOSTO AO BOTÃO VOLTAR */
   z-index: 9999;
-
   display: flex;
   align-items: center;
-
   background: linear-gradient(180deg, #997300, #ffc000);
-
   border-radius: 40px;
-
-  padding: 10px 20px;     /* mesmo padding do botão Voltar */
-  font-size: 1.2rem;      /* proporcional ao Voltar */
+  padding: 10px 20px;     
+  font-size: 1.2rem;      
   font-weight: 700;
   color: #fff;
-
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   transition: transform .2s, box-shadow .2s;
 }
@@ -228,3 +223,15 @@ h1 { font-size: 2.5rem;
     flex: 1 1 100%;
   }
 }
+
+@media (max-width: 600px) {
+  .skillsCoinsBox {
+    margin-right: 50px !important;
+    margin-top: 165px !important;
+    margin-bottom: 10px !important;
+  }
+.tutor-grid{
+  margin-top: 60px !important;
+}
+}
+
