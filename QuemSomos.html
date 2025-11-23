@@ -16,58 +16,58 @@
 </head>
 <body class="navbar-height-spacer">
 
+<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-<div class="container-fluid nav-grid">
+  <div class="container-fluid nav-grid">
 
-    <!-- COLUNA ESQUERDA (só desktop, vazia) -->
+    <!-- COLUNA ESQUERDA (desktop) -->
     <div class="nav-col-left d-none d-lg-block"></div>
 
-    <!-- BOTÃO HAMBURGUER (só mobile) -->
+    <!-- BOTÃO HAMBURGUER (mobile) -->
     <button
-    class="navbar-toggler d-lg-none ms-auto"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarNav"
-    aria-controls="navbarNav"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
+      class="navbar-toggler d-lg-none ms-auto"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
-    <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- MENU -->
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-
-    <!-- GRUPO CENTRAL -->
-    <div class="navbar-center-group d-flex align-items-center justify-content-center flex-column flex-lg-row">
-
-        <a class="nav-link" href="/index.html">Início</a>
+      <div class="navbar-center-group d-flex align-items-center justify-content-center flex-column flex-lg-row">
+        <a class="nav-link" href="/Home.html">Início</a>
         <a class="nav-link" href="/comofunciona.html">Como Funciona</a>
         <a class="nav-link" href="/QuemSomos.html">Quem Somos</a>
 
         <!-- LOGO -->
         <a class="navbar-center d-flex align-items-center" href="/index.html">
-        <img src="./img/logo.png" class="logo-center-img" alt="Logo SkillUp">
-        <span class="logo-text">SkillsUp</span>
+          <img src="./img/logo.png" class="logo-center-img" alt="Logo SkillUp">
+          <span class="logo-text">SkillsUp</span>
         </a>
 
         <a class="nav-link" id="cadastroNav" href="/Cadastro.html">Cadastro</a>
         <a class="nav-link" href="/tutor.html">Mentores</a>
 
-        <a class="nav-link" href="/ofereca_aula.html" onclick="verificarLogin('/ofereca_aula.html')">
-        Oferecer Aulas
+        <!-- BOTÃO PROTEGIDO: OFERECER AULAS -->
+        <a class="nav-link" href="#" onclick="verificarLogin('/ofereca_aula.html'); return false;">
+          Oferecer Aulas
         </a>
 
         <!-- NO MOBILE: Agendamentos dentro do menu -->
         <a class="btn btn-conta d-lg-none mt-3" href="/agendamentos.html">Agendamentos</a>
-    </div>
+      </div>
     </div>
 
-    <!-- COLUNA DIREITA (só desktop) -->
+    <!-- COLUNA DIREITA (desktop) -->
     <div class="nav-col-right d-none d-lg-flex">
-    <a class="btn btn-conta" href="/agendamentos.html">Agendamentos</a>
+      <a class="btn btn-conta" href="/agendamentos.html">Agendamentos</a>
     </div>
 
-</div>
+  </div>
 </nav>
 
 </div>

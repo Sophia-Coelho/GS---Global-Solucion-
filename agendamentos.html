@@ -37,75 +37,59 @@
     <link rel="stylesheet" href="/CSS/Rodape.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-      <div class="container-fluid nav-grid">
-        <!-- COLUNA ESQUERDA (só desktop, vazia) -->
-        <div class="nav-col-left d-none d-lg-block"></div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+  <div class="container-fluid nav-grid">
 
-        <!-- BOTÃO HAMBURGUER (só mobile) -->
-        <button
-          class="navbar-toggler d-lg-none ms-auto"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- COLUNA ESQUERDA (desktop) -->
+    <div class="nav-col-left d-none d-lg-block"></div>
 
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarNav"
-        >
-          <!-- GRUPO CENTRAL -->
-          <div
-            class="navbar-center-group d-flex align-items-center justify-content-center flex-column flex-lg-row"
-          >
-            <a class="nav-link" href="/index.html">Início</a>
-            <a class="nav-link" href="/comofunciona.html">Como Funciona</a>
-            <a class="nav-link" href="/QuemSomos.html">Quem Somos</a>
+    <!-- BOTÃO HAMBURGUER (mobile) -->
+    <button
+      class="navbar-toggler d-lg-none ms-auto"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-            <!-- LOGO -->
-            <a
-              class="navbar-center d-flex align-items-center"
-              href="/index.html"
-            >
-              <img
-                src="./img/logo.png"
-                class="logo-center-img"
-                alt="Logo SkillUp"
-              />
-              <span class="logo-text">SkillsUp</span>
-            </a>
+    <!-- MENU -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <div class="navbar-center-group d-flex align-items-center justify-content-center flex-column flex-lg-row">
+        <a class="nav-link" href="/Home.html">Início</a>
+        <a class="nav-link" href="/comofunciona.html">Como Funciona</a>
+        <a class="nav-link" href="/QuemSomos.html">Quem Somos</a>
 
-            <a class="nav-link" id="cadastroNav" href="/Cadastro.html"
-              >Cadastro</a
-            >
-            <a class="nav-link" href="/tutor.html">Mentores</a>
+        <!-- LOGO -->
+        <a class="navbar-center d-flex align-items-center" href="/index.html">
+          <img src="./img/logo.png" class="logo-center-img" alt="Logo SkillUp">
+          <span class="logo-text">SkillsUp</span>
+        </a>
 
-            <a
-              class="nav-link"
-              href="/ofereca_aula.html"
-              onclick="verificarLogin('/ofereca_aula.html')"
-            >
-              Oferecer Aulas
-            </a>
+        <a class="nav-link" id="cadastroNav" href="/Cadastro.html">Cadastro</a>
+        <a class="nav-link" href="/tutor.html">Mentores</a>
 
-            <!-- NO MOBILE: Agendamentos dentro do menu -->
-            <a class="btn btn-conta d-lg-none mt-3" href="/agendamentos.html"
-              >Agendamentos</a
-            >
-          </div>
-        </div>
+        <!-- BOTÃO PROTEGIDO: OFERECER AULAS -->
+        <a class="nav-link" href="#" onclick="verificarLogin('/ofereca_aula.html'); return false;">
+          Oferecer Aulas
+        </a>
 
-        <!-- COLUNA DIREITA (só desktop) -->
-        <div class="nav-col-right d-none d-lg-flex">
-          <a class="btn btn-conta" href="/agendamentos.html">Agendamentos</a>
-        </div>
+        <!-- NO MOBILE: Agendamentos dentro do menu -->
+        <a class="btn btn-conta d-lg-none mt-3" href="/agendamentos.html">Agendamentos</a>
       </div>
-    </nav>
+    </div>
+
+    <!-- COLUNA DIREITA (desktop) -->
+    <div class="nav-col-right d-none d-lg-flex">
+      <a class="btn btn-conta" href="/agendamentos.html">Agendamentos</a>
+    </div>
+
+  </div>
+</nav>
 
     <div id="minhasAulas" class="agendamentos_pagina">
       <div class="container py-5">
