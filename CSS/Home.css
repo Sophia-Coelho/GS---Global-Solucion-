@@ -493,3 +493,7 @@
     bottom: -90px !important;
   }
 }
+body .uwy.userway_p1 .userway_buttons_wrapper {
+    top: auto !important;    /* Anula o posicionamento no topo */
+    bottom: 20px !important; /* Fixa ele 20px acima do final da tela */
+}
