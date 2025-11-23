@@ -5,7 +5,8 @@
 <p>🎥 <strong>Pitch (3 min):</strong> <a href="https://www.youtube.com/watch?v=1y66SGXUl3o" style="color:#f57c00;">Assista aqui</a></p>
 <p>📌 <strong>Prazo Total do Projeto:</strong> <span style="color:#0288d1;">13 dias</span></p>
 
-<p>🌐 <strong>Site Oficial:</strong> <a href="" style="color:#43a047;">https://skillsup-livid.vercel.app/</a></p>
+<p>🌐 <strong>Site Oficial:</strong> <a href="https://skillsup-livid.vercel.app/" style="color:#43a047;">https://skillsup-livid.vercel.app/</a></p>
+
 
 </div>
 
