@@ -13,18 +13,15 @@
 
 ## 📑 Índice
 
-1. [💡 Descrição do Desafio](#-descrição-do-desafio)  
-2. [🌧️ Escolha do Tema](#-escolha-do-tema)  
-3. [🌐 Solução Proposta — SkillsUp](#-solução-proposta--skillsup)  
-4. [⚡ Funcionalidades Principais](#-funcionalidades-principais)  
-5. [🔄 Fluxos de Usuário](#-fluxos-de-usuário)  
-6. [🎨 UX & Componentes Interativos](#-ux--componentes-interativos)  
-7. [♿ Acessibilidade & Integrações](#-acessibilidade--integrações)  
-8. [🖼️ Protótipo & Assets Visuais](#-protótipo--assets-visuais)  
-9. [👥 Equipe](#-equipe)  
-10. [🧑‍🏭 Minhas Contribuições](#-minhas-contribuições)  
-11. [💻 Como abrir o protótipo / páginas locais](#-como-abrir-o-protótipo--páginas-locais)  
-12. [⚠️ Importante](#-importante)
+1. [💡 Descrição do Desafio](#-Descrição-do-desafio)  
+2. [🌧️ Escolha do Tema](#-Escolha-do-tema)  
+3. [🌐 Solução Proposta — SkillsUp](#-Solução-proposta--skillsup)  
+4. [⚡ Funcionalidades Principais](#-Funcionalidades-principais)  
+5. [🔄 Fluxos de Usuário](#-Fluxos-de-usuário)  
+6. [🎨 UX & Componentes Interativos](#-Ux--componentes-interativos)  
+7. [♿ Acessibilidade & Integrações](#-Acessibilidade--integrações)  
+8. [🖼️ Protótipo & Assets Visuais](#-Protótipo--assets-visuais)  
+9. [👥 Equipe](#-Equipe)  
 
 ---
 
