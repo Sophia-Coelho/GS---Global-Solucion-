@@ -2,19 +2,21 @@ body {
   font-family: 'Quicksand', 'Roboto', sans-serif;
   background: linear-gradient(90deg, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 1) 100%);
   min-height: 100vh;
+  margin: 0;
 }
 
-/* GRID DE TUTORES */
-
+/*       GRID DE TUTORES      */
 .titulo-tutor {
-  margin-top: 85px; /* ou o valor que desejar */
+  margin-top: 85px;
 }
 
-h1 { font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+h1 { 
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
 
 .tutor-grid {
   display: grid;
@@ -50,32 +52,31 @@ h1 { font-size: 2.5rem;
   color: #fff;
   border-radius: 10px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .btn-agendar:hover {
   background-color: #03a9f4;
 }
 
-
-/* BADGE SKILLS COINS — alinhado à direita, igual ao botão Voltar */
+/*       BOTÃO SKILLS COINS   */
 .skillsCoinsBox {
-  position: absolute;
+  position: absolute; /* padrão para telas grandes */
   top: 92px;
-  right: 20px;        /* LADO OPOSTO AO BOTÃO VOLTAR */
+  right: 20px;
   z-index: 9999;
   display: flex;
   align-items: center;
   background: linear-gradient(180deg, #997300, #ffc000);
   border-radius: 40px;
-  padding: 10px 20px;     
-  font-size: 1.2rem;      
+  padding: 10px 20px;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   transition: transform .2s, box-shadow .2s;
 }
 
-/* Remover interferência do Bootstrap dentro do badge */
 .skillsCoinsBox .badge {
   background: transparent !important;
   padding: 0 !important;
@@ -85,61 +86,46 @@ h1 { font-size: 2.5rem;
   font-size: inherit !important;
 }
 
-/* HOVER igual ao botão Voltar */
 .skillsCoinsBox:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 18px rgba(0,0,0,0.20);
 }
 
-/* RESPONSIVO — exatamente igual ao botão Voltar */
-@media (max-width: 600px) {
-  .skillsCoinsBox {
-    padding: 10px 14px !important;
-    font-size: 1rem;
-  }
+/*       BOTÕES HORÁRIOS      */
+.horario-btn {
+  width: 120px;
+  text-align: center;
+  padding: 10px 0;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
-
-.voltar {
-  position: absolute;
-  top: 95px;            /* mesmo alinhamento vertical do badge */
-  left: 20px;           /* equivalente ao margin-right do badge */
-  z-index: 9999;
-  background: #fff;
-
-  border-radius: 8px;
-  padding: 5px 25px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  transition: transform .2s, box-shadow .2s;
+.horario-btn.active {
+  background-color: #6f42c1 !important;
+  border-color: #6f42c1 !important;
+  color: white !important;
 }
 
-.voltar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+.horario-btn.ocupado {
+  background-color: #ffb3b3 !important;
+  border-color: #cc0000 !important;
+  color: #660000 !important;
+  pointer-events: none;
+  cursor: not-allowed !important;
+  opacity: 0.8;
 }
 
-/* Responsivo para telas pequenas */
-@media (max-width: 600px) {
-  .voltar {
-    padding: 10px 14px !important;
-    font-size: 1rem;
-  }
+.confirm-btn {
+  background: linear-gradient(90deg, #673ab7, #03a9f4);
+  border-radius: 10px;
 }
 
-/* FADE-IN */
-
-
-
-[vw-access-button] {
-    top: 10px !important;   /* sobe o botão */
-    right: 12px !important;     /* empurra um pouco para a direita */
-    
+.horarios-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
-
 
 #modalBloqueio {
   display: none;
@@ -173,65 +159,34 @@ h1 { font-size: 2.5rem;
   font-size: 1rem;
 }
 
-.horario-btn.ocupado {
-  background-color: #ffb3b3 !important;
-  border-color: #cc0000 !important;
-  color: #660000 !important;
-  pointer-events: none;
-  cursor: not-allowed !important;
-  opacity: 0.8;
-}
-
-.confirm-btn {
-  background: linear-gradient(90deg, #673ab7, #03a9f4);
-  border-radius: 10px;
-}
-
-
-/* === ARRUMA OS BOTÕES DE HORÁRIOS PARA TEREM O MESMO TAMANHO === */
-.horario-btn {
-  width: 120px;         /* largura fixa */
-  text-align: center;
-  padding: 10px 0;
-  box-sizing: border-box;
-}
-
-.horario-btn.active {
-    background-color: #6f42c1 !important;
-    border-color: #6f42c1 !important;
-    color: white !important;
-}
-
-/* Mantém o comportamento do container flex */
-.horarios-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* centraliza os que sobrarem */
-  gap: 10px;
-}
-
-/* Em telas menores: 2 por linha */
 @media (max-width: 600px) {
+  .skillsCoinsBox{
+    margin-top: 80px !important;
+    position: relative !important; 
+    top: auto !important;
+    right: 50px !important;
+    left: 60px !important;
+    margin: 10px 0; 
+    max-width: 200px !important;
+    text-align: center;
+  }
+
   .horario-btn {
     flex: 1 1 calc(50% - 10px);
   }
+
+  .titulo-tutor {
+    margin-top: 10px !important; /* garante que o título não seja coberto */
+  }
+
+  .tutor-grid {
+    margin-top: 60px !important;
+  }
 }
 
-/* Em telas muito pequenas: 1 por linha */
+/* Para telas muito pequenas (até 380px) */
 @media (max-width: 380px) {
   .horario-btn {
     flex: 1 1 100%;
   }
 }
-
-@media (max-width: 600px) {
-  .skillsCoinsBox {
-    margin-right: 50px !important;
-    margin-top: 165px !important;
-    margin-bottom: 10px !important;
-  }
-.tutor-grid{
-  margin-top: 60px !important;
-}
-}
-
