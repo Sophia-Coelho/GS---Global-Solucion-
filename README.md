@@ -14,7 +14,7 @@
 ## 📑 Índice
 
 1. [💡 Descrição do Desafio](#-Descrição-do-desafio)  
-2. [🌧️ Escolha do Tema](#-Escolha-do-tema)  
+2. [🌧️ Escolha do tema](#-Escolha-do-tema)  
 3. [🌐 Solução Proposta — SkillsUp](#-Solução-proposta--skillsup)  
 4. [⚡ Funcionalidades Principais](#-Funcionalidades-principais)  
 5. [🔄 Fluxos de Usuário](#-Fluxos-de-usuário)  
