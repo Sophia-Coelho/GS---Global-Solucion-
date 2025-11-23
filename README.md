@@ -14,7 +14,7 @@
 ## 📑 Índice
 
 1. [💡 Descrição do Desafio](#-Descrição-do-desafio)  
-2. [🌧️ Escolha do tema](#-Escolha-do-tema)  
+2. [🎯 Escolha do tema](#-Escolha-do-tema)  
 3. [🌐 Solução Proposta — SkillsUp](#-Solução-proposta--skillsup)  
 4. [⚡ Funcionalidades Principais](#-Funcionalidades-principais)  
 5. [🔄 Fluxos de Usuário](#-Fluxos-de-usuário)  
@@ -38,7 +38,7 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 
 ---
 
-## 🌧️ Escolha do tema  
+## 🎯 Escolha do tema  
 
 ### Problema Identificado
 
@@ -54,11 +54,10 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 
 ## 🌐 Solução Proposta — SkillsUp
 
-**SkillsUp** transforma conhecimento em oportunidade através de uma **economia colaborativa de créditos — SkillsCoins**.  
-💡 Ensinar gera créditos; consumir aulas consome créditos.
+**SkillsUp** transforma conhecimento em oportunidade através de uma **economia colaborativa de créditos — SkillsCoins**. Ensinar gera créditos; consumir aulas consome créditos.
 
-### 🎯 Impacto
-- 🌱 Democratiza o acesso ao conhecimento  
+### 📈 Impacto
+- 📚 Democratiza o acesso ao conhecimento  
 - 🤝 Estimula colaboração, empatia e comunicação  
 - ⚖️ Reduz desigualdades educacionais  
 - 🏆 Transforma aprendizado em capital social  
