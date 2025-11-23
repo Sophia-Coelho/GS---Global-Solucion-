@@ -338,15 +338,16 @@
     height: 6px;
     background: rgba(255,255,255,0.35);
     border-radius: 999px;
-    margin: 25px auto 0;
+    margin: 40px auto 25px;
     overflow: hidden;
 }
 
 .carousel-progress-bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #6a11cb, #2575fc);
-  border-radius: 999px;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border-radius: 999px;
+    transition: width .4s ease;
 }
 
 @keyframes slideProgress {
